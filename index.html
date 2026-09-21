@@ -1,0 +1,1753 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sealed Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;500;600;700&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+  :root{
+    --ground:#F3F5F0;
+    --surface:#FFFFFF;
+    --surface-2:#EAEEE5;
+    --ink:#191D18;
+    --ink-2:#5B6458;
+    --ink-3:#89927F;
+    --rule:#D8DDD1;
+    --rule-strong:#B9C2B2;
+    --accent:#0E6B57;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#DDEDE6;
+    --gain:#11745C;
+    --loss:#A53A22;
+    --gold:#8E6612;
+    --gold-soft:#F4EAD3;
+    --shadow:0 1px 2px rgba(25,29,24,.06), 0 8px 24px -16px rgba(25,29,24,.3);
+    --sans:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --serif:"IBM Plex Serif", ui-serif, Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#121510;
+      --surface:#191D17;
+      --surface-2:#20251E;
+      --ink:#E8ECE2;
+      --ink-2:#A2AA98;
+      --ink-3:#79826F;
+      --rule:#2B3229;
+      --rule-strong:#3D4739;
+      --accent:#4FC2A0;
+      --accent-ink:#0B1A15;
+      --accent-soft:#16332A;
+      --gain:#4FC2A0;
+      --loss:#E28368;
+      --gold:#D6A94A;
+      --gold-soft:#322A16;
+      --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#121510;
+    --surface:#191D17;
+    --surface-2:#20251E;
+    --ink:#E8ECE2;
+    --ink-2:#A2AA98;
+    --ink-3:#79826F;
+    --rule:#2B3229;
+    --rule-strong:#3D4739;
+    --accent:#4FC2A0;
+    --accent-ink:#0B1A15;
+    --accent-soft:#16332A;
+    --gain:#4FC2A0;
+    --loss:#E28368;
+    --gold:#D6A94A;
+    --gold-soft:#322A16;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:1180px; margin:0 auto; padding-inline:16px; padding-block:22px 64px; }
+  .num{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; }
+  .gain{ color:var(--gain); }
+  .loss{ color:var(--loss); }
+  .muted{ color:var(--ink-2); }
+  button{ font:inherit; color:inherit; }
+  :where(button,a,input,select,textarea):focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:4px; }
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    display:flex; flex-wrap:wrap; align-items:flex-end; gap:12px 20px;
+    padding-bottom:14px; border-bottom:2px solid var(--rule-strong);
+  }
+  .brand h1{
+    font-family:var(--serif); font-weight:600; font-size:27px; line-height:1.1;
+    margin:0; letter-spacing:-.015em; text-wrap:balance;
+  }
+  .brand p{ margin:5px 0 0; font-size:12.5px; color:var(--ink-2); letter-spacing:.02em; }
+  .masthead .spacer{ flex:1 1 40px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:7px;
+    border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink);
+    padding:7px 13px; border-radius:6px; cursor:pointer; font-size:13.5px; font-weight:500;
+    white-space:nowrap;
+  }
+  .btn:hover{ border-color:var(--ink-3); }
+  .btn-primary{ background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:600; }
+  .btn-primary:hover{ filter:brightness(1.07); border-color:var(--accent); }
+  .btn-ghost{ background:transparent; border-color:transparent; color:var(--ink-2); padding-inline:9px; }
+  .btn-ghost:hover{ color:var(--ink); background:var(--surface-2); border-color:transparent; }
+  .btn-danger{ color:var(--loss); border-color:var(--rule-strong); background:transparent; }
+  .btn-danger:hover{ border-color:var(--loss); }
+
+  /* ---------- view tabs ---------- */
+  .tabs{ display:flex; gap:26px; margin-top:16px; border-bottom:1px solid var(--rule); }
+  .tabs button{
+    border:0; background:transparent; cursor:pointer; padding:0 0 9px; font-size:15px;
+    font-weight:500; color:var(--ink-3); border-bottom:2px solid transparent; margin-bottom:-1px;
+    letter-spacing:-.005em;
+  }
+  .tabs button:hover{ color:var(--ink-2); }
+  .tabs button[aria-pressed="true"]{ color:var(--ink); font-weight:600; border-bottom-color:var(--accent); }
+  .tabs .count{
+    font-family:var(--mono); font-size:11px; color:var(--ink-3);
+    margin-left:6px; font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- summary ---------- */
+  .summary{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    margin-top:18px; background:var(--surface); border:1px solid var(--rule);
+    border-radius:8px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .tile{ padding:14px 16px 15px; border-right:1px solid var(--rule); }
+  .tile:last-child{ border-right:0; }
+  .tile .k{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.09em;
+    color:var(--ink-3); font-weight:600;
+  }
+  .tile .v{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:22px; font-weight:500; margin-top:5px; letter-spacing:-.02em; }
+  .tile .s{ font-size:12px; color:var(--ink-2); margin-top:3px; font-variant-numeric:tabular-nums; }
+  .tile.flag{ background:var(--accent-soft); }
+
+  .meta-line{
+    display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px;
+    margin-top:10px; font-size:12.5px; color:var(--ink-2);
+  }
+  .meta-line .dot{ color:var(--rule-strong); }
+  .switch{ display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none; }
+  .switch input{ accent-color:var(--accent); width:14px; height:14px; margin:0; }
+  .fee-input{
+    width:52px; font-family:var(--mono); font-size:12px; padding:2px 5px;
+    border:1px solid var(--rule); background:var(--surface); color:var(--ink); border-radius:4px;
+  }
+
+  /* ---------- controls ---------- */
+  .controls{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    margin-top:22px; padding-bottom:10px;
+  }
+  .segmented{ display:inline-flex; border:1px solid var(--rule-strong); border-radius:6px; overflow:hidden; background:var(--surface); }
+  .segmented button{
+    border:0; background:transparent; padding:6px 13px; cursor:pointer;
+    font-size:13px; font-weight:500; color:var(--ink-2); border-right:1px solid var(--rule);
+  }
+  .segmented button:last-child{ border-right:0; }
+  .segmented button[aria-pressed="true"]{ background:var(--accent); color:var(--accent-ink); font-weight:600; }
+  .search{
+    flex:1 1 180px; min-width:150px; padding:7px 11px; border-radius:6px;
+    border:1px solid var(--rule-strong); background:var(--surface); color:var(--ink); font-size:13.5px;
+  }
+  .search::placeholder{ color:var(--ink-3); }
+
+  /* ---------- banner ---------- */
+  .banner{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+    background:var(--gold-soft); border:1px solid var(--rule); border-left:3px solid var(--gold);
+    border-radius:6px; padding:11px 14px; margin-bottom:14px; font-size:13px; color:var(--ink);
+  }
+  .banner strong{ font-weight:600; }
+  .banner .spacer{ flex:1 1 10px; }
+
+  /* ---------- ledger table ---------- */
+  .sheet{
+    background:var(--surface); border:1px solid var(--rule); border-radius:8px;
+    box-shadow:var(--shadow); overflow:hidden;
+  }
+  .scroller{ overflow-x:auto; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  thead th{
+    text-align:right; padding:9px 12px; font-size:10.5px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.07em; color:var(--ink-3);
+    border-bottom:1px solid var(--rule-strong); background:var(--surface-2); white-space:nowrap;
+  }
+  thead th:first-child{ text-align:left; }
+  thead th.sortable{ cursor:pointer; user-select:none; }
+  thead th.sortable:hover{ color:var(--ink); }
+  thead th .arrow{ opacity:.55; font-size:9px; }
+  tbody tr{ border-bottom:1px solid var(--rule); cursor:pointer; }
+  tbody tr:last-child{ border-bottom:0; }
+  tbody tr:hover{ background:var(--surface-2); }
+  tbody td{ padding:10px 12px; text-align:right; white-space:nowrap; vertical-align:top; }
+  tbody td:first-child{ text-align:left; white-space:normal; min-width:200px; }
+  tfoot td{
+    padding:11px 12px; text-align:right; border-top:2px solid var(--rule-strong);
+    background:var(--surface-2); font-weight:600; white-space:nowrap;
+  }
+  tfoot td:first-child{
+    text-align:left; font-size:10.5px; text-transform:uppercase;
+    letter-spacing:.07em; color:var(--ink-3);
+  }
+
+  .item-name{ font-weight:600; letter-spacing:-.005em; }
+  .item-sub{ display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-top:4px; font-size:11.5px; color:var(--ink-2); }
+  .chip{
+    display:inline-block; padding:1px 7px; border-radius:99px; font-size:10.5px;
+    font-weight:600; letter-spacing:.02em; border:1px solid var(--rule-strong); color:var(--ink-2);
+  }
+  .chip.pokemon{ background:var(--gold-soft); border-color:var(--gold); color:var(--gold); }
+  .chip.onepiece{ background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+  .chip.lorcana{ background:rgba(139,92,246,.14); border-color:#8b5cf6; color:#8b5cf6; }
+  .chip.magic{ background:rgba(217,119,6,.16); border-color:#d97706; color:#d97706; }
+  .chip.dragonball{ background:rgba(59,130,246,.14); border-color:#3b82f6; color:#3b82f6; }
+  .chip.starwars{ background:rgba(220,38,38,.13); border-color:#dc2626; color:#dc2626; }
+  .chip.sold{ background:var(--surface-2); }
+  .chip.stale{ background:transparent; border-color:var(--loss); color:var(--loss); }
+  .chip.sample{ background:transparent; border-style:dashed; }
+  .sub-note{ display:block; font-size:11px; color:var(--ink-3); margin-top:3px; font-variant-numeric:tabular-nums; }
+  tr.is-sample{ opacity:.62; }
+
+  .empty{ padding:44px 20px; text-align:center; color:var(--ink-2); }
+  .empty h3{ font-family:var(--serif); font-size:18px; margin:0 0 6px; color:var(--ink); }
+  .empty p{ margin:0 auto; max-width:38ch; font-size:13.5px; }
+
+  /* ---------- dialog ---------- */
+  dialog{
+    border:1px solid var(--rule-strong); border-radius:10px; padding:0;
+    background:var(--surface); color:var(--ink); width:min(620px, calc(100vw - 32px));
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.45);
+  }
+  dialog::backdrop{ background:rgba(12,16,11,.5); }
+  .dlg-head{
+    display:flex; align-items:center; gap:10px; padding:15px 18px;
+    border-bottom:1px solid var(--rule);
+  }
+  .dlg-head h2{ font-family:var(--serif); font-size:17px; margin:0; font-weight:600; flex:1; }
+  .dlg-body{ padding:16px 18px; display:grid; gap:13px; max-height:min(66vh,560px); overflow-y:auto; }
+  .dlg-foot{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+    padding:13px 18px; border-top:1px solid var(--rule); background:var(--surface-2);
+  }
+  .dlg-foot .spacer{ flex:1 1 10px; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+  .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:13px; }
+  .field{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+  .field label{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+    font-weight:600; color:var(--ink-3);
+  }
+  .field input, .field select, .field textarea{
+    font:inherit; font-size:14px; padding:7px 9px; border-radius:6px;
+    border:1px solid var(--rule-strong); background:var(--ground); color:var(--ink); min-width:0;
+  }
+  .field input[type="number"], .field input[type="date"]{ font-family:var(--mono); font-size:13.5px; }
+  .field textarea{ resize:vertical; min-height:56px; font-size:13.5px; }
+  .field .hint{ font-size:11px; color:var(--ink-3); }
+  fieldset.section{
+    border:1px solid var(--rule); border-radius:8px; padding:13px; margin:0;
+    display:grid; gap:13px; background:var(--ground);
+  }
+  fieldset.section legend{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+    font-weight:600; color:var(--ink-3); padding:0 6px;
+  }
+  .lookup{ display:flex; flex-wrap:wrap; gap:8px; }
+  .lookup a{
+    font-size:12px; color:var(--accent); text-decoration:none; font-weight:500;
+    border:1px solid var(--rule-strong); border-radius:6px; padding:5px 10px; background:var(--surface);
+  }
+  .lookup a:hover{ border-color:var(--accent); }
+  .prov{
+    border:1px dashed var(--rule-strong); border-radius:8px; padding:10px 12px;
+    background:var(--ground); font-size:12px; color:var(--ink-2);
+  }
+  .prov-head{
+    font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
+    font-weight:600; color:var(--ink-3); margin-bottom:6px;
+  }
+  .prov ul{ margin:0; padding:0; list-style:none; display:grid; gap:4px; }
+  .prov li{ display:flex; justify-content:space-between; gap:12px; font-variant-numeric:tabular-nums; }
+  .prov li .p{ font-family:var(--mono); color:var(--ink); }
+  .prov .mean{ margin-top:7px; padding-top:7px; border-top:1px solid var(--rule); color:var(--ink); }
+  .prov .mean strong{ font-family:var(--mono); font-weight:600; }
+  .label-soft{ text-transform:none; letter-spacing:0; font-weight:400; color:var(--ink-3); }
+  .how-body{ padding:16px 18px; display:grid; gap:11px; font-size:13.5px; line-height:1.55; }
+  .how-body h3{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-3); margin:4px 0 0; }
+  .how-body code{
+    font-family:var(--mono); font-size:12.5px; background:var(--surface-2);
+    padding:2px 6px; border-radius:4px; border:1px solid var(--rule);
+  }
+  .readout{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+    border:1px dashed var(--rule-strong); border-radius:8px; padding:11px 13px; background:var(--ground);
+  }
+  .readout div span{ display:block; }
+  .readout .k{ font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-3); font-weight:600; }
+  .readout .v{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-size:15px; margin-top:2px; }
+
+  .toast{
+    position:fixed; left:50%; transform:translateX(-50%);
+    bottom:calc(18px + env(safe-area-inset-bottom, 0px));
+    background:var(--ink); color:var(--ground); padding:9px 16px; border-radius:99px;
+    font-size:13px; font-weight:500; box-shadow:var(--shadow); z-index:50;
+  }
+
+  @media (max-width:860px){
+    .summary{ grid-template-columns:1fr 1fr; }
+    .tile:nth-child(2){ border-right:0; }
+    .tile:nth-child(-n+2){ border-bottom:1px solid var(--rule); }
+  }
+  @media (max-width:640px){
+    .grid2, .grid3{ grid-template-columns:1fr; }
+    .readout{ grid-template-columns:1fr 1fr; }
+    .brand h1{ font-size:23px; }
+    thead, tfoot{ display:none; }
+    .scroller{ overflow-x:visible; }
+    table, tbody, tbody tr, tbody td{ display:block; width:100%; }
+    tbody tr{ padding:13px 14px; border-bottom:1px solid var(--rule); }
+    tbody td{
+      padding:3px 0; text-align:right; display:flex; align-items:baseline;
+      justify-content:space-between; gap:14px; white-space:normal;
+    }
+    tbody td:first-child{ padding-bottom:9px; display:block; min-width:0; }
+    tbody td[data-label]::before{
+      content:attr(data-label); text-align:left; font-size:10.5px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.07em; color:var(--ink-3); flex:0 0 auto;
+    }
+    tbody td .sub-note{ display:inline; margin-left:6px; }
+    .mob-total{ margin-top:8px; padding-top:8px; border-top:1px solid var(--rule); }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand">
+      <h1>Sealed Ledger</h1>
+      <p id="subtitle">Pokémon · One Piece · Lorcana · Magic · Dragon Ball sealed product — cost basis, market value, P/L</p>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn" id="exportBtn" hidden>Export CSV</button>
+    <button class="btn btn-primary" id="addBtn">+ Add purchase</button>
+  </header>
+
+  <nav class="tabs" id="viewTabs" aria-label="Ledger view">
+    <button data-view="portfolio" aria-pressed="true">Portfolio</button>
+    <button data-view="watch" aria-pressed="false">Watchlist</button>
+  </nav>
+
+  <section class="summary" id="summary" aria-label="Portfolio summary"></section>
+  <div class="meta-line" id="metaLine"></div>
+
+  <div class="controls">
+    <div class="segmented" id="statusSeg" role="group" aria-label="Filter by status">
+      <button data-status="held" aria-pressed="true">Holding</button>
+      <button data-status="sold" aria-pressed="false">Sold</button>
+      <button data-status="all" aria-pressed="false">All</button>
+    </div>
+    <div class="segmented" id="gameSeg" role="group" aria-label="Filter by game">
+      <button data-game="all" aria-pressed="true">All</button>
+      <button data-game="pokemon" aria-pressed="false">Pokémon</button>
+      <button data-game="onepiece" aria-pressed="false">One Piece</button>
+      <button data-game="lorcana" aria-pressed="false">Lorcana</button>
+      <button data-game="magic" aria-pressed="false">Magic</button>
+      <button data-game="dragonball" aria-pressed="false">Dragon Ball</button>
+      <button data-game="starwars" aria-pressed="false">Star Wars</button>
+    </div>
+    <input class="search" id="search" type="search" placeholder="Search product, set, or vendor…" aria-label="Search the ledger">
+  </div>
+
+  <div id="bannerSlot"></div>
+
+  <div class="sheet">
+    <div class="scroller">
+      <table id="ledger">
+        <thead><tr id="headRow"></tr></thead>
+        <tbody id="rows"></tbody>
+        <tfoot id="foot"></tfoot>
+      </table>
+    </div>
+    <div class="empty" id="emptyState" hidden>
+      <h3>Nothing here yet</h3>
+      <p>Add a purchase to start tracking cost basis against current market value.</p>
+    </div>
+  </div>
+</div>
+
+<dialog id="editor">
+  <form method="dialog" id="editorForm">
+    <div class="dlg-head">
+      <h2 id="dlgTitle">Add purchase</h2>
+      <button type="button" class="btn btn-ghost" id="dlgClose" aria-label="Close">✕</button>
+    </div>
+    <div class="dlg-body">
+      <div class="grid2">
+        <div class="field" style="grid-column:1 / -1;">
+          <label for="f-product">Product</label>
+          <input id="f-product" name="product" required placeholder="e.g. Prismatic Evolutions Elite Trainer Box">
+        </div>
+        <div class="field">
+          <label for="f-game">Game</label>
+          <select id="f-game" name="game">
+            <option value="pokemon">Pokémon</option>
+            <option value="onepiece">One Piece</option>
+            <option value="lorcana">Lorcana</option>
+            <option value="magic">Magic</option>
+            <option value="dragonball">Dragon Ball</option>
+            <option value="starwars">Star Wars</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-type">Product type</label>
+          <select id="f-type" name="type">
+            <option>Elite Trainer Box</option>
+            <option>Booster Box</option>
+            <option>Booster Case</option>
+            <option>Bundle</option>
+            <option>Blister / 3-pack</option>
+            <option>Tin</option>
+            <option>Collection Box</option>
+            <option>Starter Deck</option>
+            <option>Loose pack</option>
+            <option>Single card</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-set">Set / code</label>
+          <input id="f-set" name="set" placeholder="e.g. SV8.5 · OP-09">
+        </div>
+        <div class="field">
+          <label for="f-vendor">Bought from</label>
+          <input id="f-vendor" name="vendor" placeholder="e.g. Costco, LGS, TCGplayer">
+        </div>
+      </div>
+
+      <fieldset class="section">
+        <legend>Purchase</legend>
+        <div class="grid3">
+          <div class="field">
+            <label for="f-date">Date bought</label>
+            <input id="f-date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="f-qty">Units</label>
+            <input id="f-qty" name="qty" type="number" min="1" step="1" value="1" required>
+          </div>
+          <div class="field">
+            <label for="f-msrp">MSRP / unit</label>
+            <input id="f-msrp" name="msrp" type="number" min="0" step="0.01" placeholder="59.99">
+          </div>
+        </div>
+        <div class="grid3">
+          <div class="field">
+            <label for="f-cost">Paid / unit</label>
+            <input id="f-cost" name="cost" type="number" min="0" step="0.01" required placeholder="52.00">
+            <span class="hint">After discount, before shipping</span>
+          </div>
+          <div class="field">
+            <label for="f-ship">Shipping + tax (total)</label>
+            <input id="f-ship" name="shipping" type="number" min="0" step="0.01" placeholder="0.00">
+            <span class="hint">Spread across all units</span>
+          </div>
+          <div class="field">
+            <label for="f-status">Status</label>
+            <select id="f-status" name="status">
+              <option value="held">Holding</option>
+              <option value="sold">Sold</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="section" id="marketSection">
+        <legend>Current market value</legend>
+        <div class="grid2">
+          <div class="field">
+            <label for="f-market">Market value / unit</label>
+            <input id="f-market" name="market" type="number" min="0" step="0.01" placeholder="84.00">
+          </div>
+          <div class="field">
+            <label for="f-asof">Price checked on</label>
+            <input id="f-asof" name="marketAsOf" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-priceurl">Price source <span class="label-soft">— pins this lot for auto-refresh</span></label>
+          <input id="f-priceurl" name="priceUrl" type="url" placeholder="https://www.pricecharting.com/game/…">
+          <span class="hint">Variants diverge hard — a standard ETB and a Pokémon Center ETB are different markets. Pinning the exact URL keeps refreshes on the right one.</span>
+        </div>
+        <div id="priceProv"></div>
+        <div class="lookup" id="lookup"></div>
+        <span class="hint">Use recent <em>sold</em> listings, not asking prices — asks run well above what sealed product actually clears at.</span>
+      </fieldset>
+
+      <fieldset class="section" id="saleSection" hidden>
+        <legend>Sale</legend>
+        <div class="grid3">
+          <div class="field">
+            <label for="f-saledate">Date sold</label>
+            <input id="f-saledate" name="saleDate" type="date">
+          </div>
+          <div class="field">
+            <label for="f-saleprice">Sold for / unit</label>
+            <input id="f-saleprice" name="salePrice" type="number" min="0" step="0.01">
+          </div>
+          <div class="field">
+            <label for="f-fee">Fees %</label>
+            <input id="f-fee" name="feePct" type="number" min="0" max="100" step="0.01">
+            <span class="hint">eBay ≈ 13.25%</span>
+          </div>
+        </div>
+        <div class="field" id="splitField" hidden>
+          <label for="f-soldqty">Units sold</label>
+          <input id="f-soldqty" name="soldQty" type="number" min="1" step="1">
+          <span class="hint" id="splitHint"></span>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="f-notes">Notes</label>
+        <textarea id="f-notes" name="notes" placeholder="Storage, condition, why you bought it…"></textarea>
+      </div>
+
+      <div class="readout" id="readout" aria-live="polite"></div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn btn-danger" id="deleteBtn" hidden>Delete</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn" id="cancelBtn">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="saveBtn">Save entry</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="watchDlg">
+  <form method="dialog" id="watchForm">
+    <div class="dlg-head">
+      <h2 id="watchTitle">Add to watchlist</h2>
+      <button type="button" class="btn btn-ghost" id="watchClose" aria-label="Close">✕</button>
+    </div>
+    <div class="dlg-body">
+      <div class="field">
+        <label for="w-product">Product</label>
+        <input id="w-product" required placeholder="e.g. Mega Evolution Booster Box">
+      </div>
+      <div class="grid3">
+        <div class="field">
+          <label for="w-game">Game</label>
+          <select id="w-game">
+            <option value="pokemon">Pokémon</option>
+            <option value="onepiece">One Piece</option>
+            <option value="lorcana">Lorcana</option>
+            <option value="magic">Magic</option>
+            <option value="dragonball">Dragon Ball</option>
+            <option value="starwars">Star Wars</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="w-type">Product type</label>
+          <select id="w-type">
+            <option>Elite Trainer Box</option>
+            <option>Booster Box</option>
+            <option>Booster Case</option>
+            <option>Bundle</option>
+            <option>Blister / 3-pack</option>
+            <option>Tin</option>
+            <option>Collection Box</option>
+            <option>Starter Deck</option>
+            <option>Loose pack</option>
+            <option>Single card</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="w-set">Set / code</label>
+          <input id="w-set" placeholder="e.g. SV11 · OP-13">
+        </div>
+      </div>
+      <div class="grid3">
+        <div class="field">
+          <label for="w-msrp">MSRP / unit</label>
+          <input id="w-msrp" type="number" min="0" step="0.01" placeholder="49.99">
+        </div>
+        <div class="field">
+          <label for="w-market">Market / unit</label>
+          <input id="w-market" type="number" min="0" step="0.01" placeholder="—">
+          <span class="hint">Claude fills this in</span>
+        </div>
+        <div class="field">
+          <label for="w-target">Buy under</label>
+          <input id="w-target" type="number" min="0" step="0.01" placeholder="optional">
+          <span class="hint">Flags when it drops</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="w-release">Release date <span class="label-soft">— if it isn't out yet</span></label>
+        <input id="w-release" type="date">
+      </div>
+      <div class="field">
+        <label for="w-priceurl">Price source <span class="label-soft">— pins it for auto-refresh</span></label>
+        <input id="w-priceurl" type="url" placeholder="https://www.pricecharting.com/game/…">
+      </div>
+      <div id="watchProv"></div>
+      <div class="lookup" id="watchLookup"></div>
+      <div class="field">
+        <label for="w-notes">Why you're watching it</label>
+        <textarea id="w-notes" placeholder="Print run, reprint risk, rotation, hype cycle…"></textarea>
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <button type="button" class="btn btn-danger" id="watchDelete" hidden>Remove</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn" id="watchCancel">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="howDlg">
+  <div class="dlg-head">
+    <h2>How prices get updated</h2>
+    <button type="button" class="btn btn-ghost" id="howClose" aria-label="Close">✕</button>
+  </div>
+  <div class="how-body">
+    <p>This page can't reach eBay on its own — published pages are sandboxed and can't call outside sites. So pricing runs through Claude instead, and the ledger is the record it writes to.</p>
+    <h3>To add a purchase</h3>
+    <p>Tell Claude in chat: <em>"bought 6 Prismatic Evolutions ETBs on March 4, paid $49.99 each at Costco."</em> It writes the lot straight into this ledger.</p>
+    <h3>To re-price everything</h3>
+    <p>Say <code>run it</code>. Claude pulls the most recent eBay sold listings for each lot, averages the top three, and writes the result back here with the individual sales shown as receipts.</p>
+    <h3>Why the average of three</h3>
+    <p>One sale is noise — a bad photo or a Tuesday-night auction can land 20% under the market. Three recent sales smooths that without going so far back that the number is stale.</p>
+  </div>
+  <div class="dlg-foot">
+    <div class="spacer"></div>
+    <button type="button" class="btn btn-primary" id="howOk">Got it</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- state ---------------- */
+  var DEFAULT_FEE = 13.25;
+  var STALE_DAYS = 60;
+  var lots = [];
+  var watch = [];
+  var view = "portfolio";
+  var prefs = { feePct: DEFAULT_FEE, netOfFees: false };
+  var db = null, downloads = null;
+  var readOnly = false;
+  var hideSamples = false;
+  var storeReady = false;
+  var pricingState = null;
+  var filters = { status:"held", game:"all", q:"", sort:"date", dir:"desc" };
+  var editingId = null;
+
+  var SAMPLES = [
+    { id:"s1", sample:true, game:"pokemon", product:"Prismatic Evolutions Elite Trainer Box", type:"Elite Trainer Box",
+      set:"SV8.5", vendor:"Costco", date:iso(-250), qty:6, msrp:59.99, cost:49.99, shipping:0,
+      market:143.60, marketAsOf:iso(0), status:"held", notes:"",
+      pricedBy:"claude", pricedAt:iso(0),
+      priceUrl:"https://www.pricecharting.com/game/pokemon-prismatic-evolutions/elite-trainer-box",
+      priceSamples:[
+        { date:"2026-09-20", price:139.99, title:"Prismatic Evolutions Elite Trainer Box — factory sealed" },
+        { date:"2026-09-19", price:145.81, title:"Prismatic Evolutions ETB sealed" },
+        { date:"2026-09-15", price:145.00, title:"Prismatic Evolutions Elite Trainer Box new sealed" }
+      ] },
+    { id:"s2", sample:true, game:"onepiece", product:"OP-09 Emperors in the New World Booster Box", type:"Booster Box",
+      set:"OP-09", vendor:"TCGplayer", date:iso(-130), qty:4, msrp:107.76, cost:132.00, shipping:14.5,
+      market:149, marketAsOf:iso(-4), status:"held", notes:"" },
+    { id:"s3", sample:true, game:"pokemon", product:"Surging Sparks Booster Bundle", type:"Bundle",
+      set:"SV8", vendor:"Target", date:iso(-320), qty:12, msrp:26.99, cost:26.99, shipping:0,
+      market:38, marketAsOf:iso(-75), status:"held", notes:"" },
+    { id:"s4", sample:true, game:"onepiece", product:"OP-05 Awakening of the New Era Booster Box", type:"Booster Box",
+      set:"OP-05", vendor:"LGS", date:iso(-540), qty:3, msrp:107.76, cost:95.00, shipping:0,
+      market:210, marketAsOf:iso(-30), status:"sold", saleDate:iso(-60), salePrice:205, feePct:13.25, notes:"" }
+  ];
+
+  /* ---------------- helpers ---------------- */
+  function iso(offsetDays){
+    var d = new Date(); d.setDate(d.getDate() + offsetDays);
+    return d.toISOString().slice(0,10);
+  }
+  function num(v){ var n = parseFloat(v); return isFinite(n) ? n : 0; }
+  function el(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+  function trunc(s, n){
+    s = String(s == null ? "" : s);
+    return s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s;
+  }
+  /* Price movement from the stored history: latest vs the run before it,
+     and latest vs the first price we ever recorded. */
+  function movement(item){
+    var h = ((item && item.priceHistory) || []).filter(function(p){ return num(p.price) > 0 && p.date; });
+    if (h.length < 2) return { prev:null, first:null, points:h.length };
+    var last = num(h[h.length - 1].price);
+    var prev = h[h.length - 2], first = h[0];
+    return {
+      prev: { d: last - num(prev.price), pct: (last / num(prev.price)) - 1, date: prev.date },
+      first: { d: last - num(first.price), pct: (last / num(first.price)) - 1, date: first.date },
+      points: h.length
+    };
+  }
+  function mean(arr){
+    if (!arr || !arr.length) return null;
+    var t = 0, k = 0;
+    arr.forEach(function(x){ var p = num(x && x.price); if (p > 0) { t += p; k++; } });
+    return k ? t / k : null;
+  }
+  var money = new Intl.NumberFormat(undefined, { style:"currency", currency:"USD", maximumFractionDigits:2 });
+  var money0 = new Intl.NumberFormat(undefined, { style:"currency", currency:"USD", maximumFractionDigits:0 });
+  function fmt(n){ return money.format(isFinite(n) ? n : 0); }
+  function fmtBig(n){ return Math.abs(n) >= 10000 ? money0.format(n) : money.format(n); }
+  function signed(n){ return (n > 0 ? "+" : n < 0 ? "−" : "") + fmtBig(Math.abs(n)); }
+  function pct(n){
+    if (!isFinite(n)) return "—";
+    return (n > 0 ? "+" : n < 0 ? "−" : "") + Math.abs(n * 100).toFixed(1) + "%";
+  }
+  function plClass(n){ return n > 0.0001 ? "gain" : n < -0.0001 ? "loss" : "muted"; }
+  function daysBetween(a, b){
+    if (!a || !b) return null;
+    var d = (new Date(b + "T00:00:00") - new Date(a + "T00:00:00")) / 86400000;
+    return isFinite(d) ? Math.round(d) : null;
+  }
+  function today(){ return iso(0); }
+  function gameLabel(g){ return g === "pokemon" ? "Pokémon" : g === "onepiece" ? "One Piece" : g === "lorcana" ? "Lorcana" : g === "magic" ? "Magic" : g === "dragonball" ? "Dragon Ball" : g === "starwars" ? "Star Wars" : "Other"; }
+  function shortDate(s){
+    if (!s) return "—";
+    var d = new Date(s + "T00:00:00");
+    if (isNaN(d)) return "—";
+    return d.toLocaleDateString(undefined, { month:"short", day:"numeric", year:"2-digit" });
+  }
+
+  /* ---------------- economics ---------------- */
+  function calc(lot){
+    var qty = Math.max(0, num(lot.qty));
+    var perUnitShip = qty > 0 ? num(lot.shipping) / qty : 0;
+    var unitCost = num(lot.cost) + perUnitShip;
+    var basis = unitCost * qty;
+    var msrp = num(lot.msrp);
+    var vsMsrp = msrp > 0 ? (unitCost / msrp) - 1 : null;
+    var sold = lot.status === "sold";
+    var feeRate = (sold ? num(lot.feePct != null ? lot.feePct : prefs.feePct) : num(prefs.feePct)) / 100;
+
+    var grossUnit = sold ? num(lot.salePrice) : num(lot.market);
+    var gross = grossUnit * qty;
+    var applyFee = sold || prefs.netOfFees;
+    var netValue = applyFee ? gross * (1 - feeRate) : gross;
+    var pl = netValue - basis;
+    var roi = basis > 0 ? pl / basis : null;
+
+    var endDate = sold ? (lot.saleDate || today()) : today();
+    var days = daysBetween(lot.date, endDate);
+    var annual = null;
+    if (roi != null && days != null && days >= 30 && (1 + roi) > 0) {
+      annual = Math.pow(1 + roi, 365 / days) - 1;
+    }
+    var staleDays = sold ? null : daysBetween(lot.marketAsOf, today());
+    return {
+      qty:qty, unitCost:unitCost, basis:basis, msrp:msrp, vsMsrp:vsMsrp, sold:sold,
+      grossUnit:grossUnit, gross:gross, netValue:netValue, pl:pl, roi:roi,
+      days:days, annual:annual, feeRate:feeRate,
+      stale: staleDays != null && staleDays > STALE_DAYS ? staleDays : null,
+      unpriced: !sold && num(lot.market) <= 0
+    };
+  }
+
+  /* ---------------- data view ---------------- */
+  function activeLots(){
+    if (lots.length) return lots;
+    return (storeReady && !hideSamples) ? SAMPLES : [];
+  }
+  function showingSamples(){ return lots.length === 0 && storeReady && !hideSamples; }
+
+  function visibleLots(){
+    var q = filters.q.trim().toLowerCase();
+    var list = activeLots().filter(function(l){
+      if (filters.status !== "all" && (l.status || "held") !== filters.status) return false;
+      if (filters.game !== "all" && l.game !== filters.game) return false;
+      if (q) {
+        var hay = [l.product, l.set, l.vendor, l.type, l.notes, gameLabel(l.game)].join(" ").toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    var dir = filters.dir === "asc" ? 1 : -1;
+    var key = filters.sort;
+    list.sort(function(a, b){
+      var ca = calc(a), cb = calc(b), va, vb;
+      if (key === "product") { va = (a.product||"").toLowerCase(); vb = (b.product||"").toLowerCase(); return va < vb ? -dir : va > vb ? dir : 0; }
+      if (key === "date") { va = a.date || ""; vb = b.date || ""; return va < vb ? -dir : va > vb ? dir : 0; }
+      if (key === "qty") { va = ca.qty; vb = cb.qty; }
+      else if (key === "msrp") { va = ca.msrp; vb = cb.msrp; }
+      else if (key === "cost") { va = ca.unitCost; vb = cb.unitCost; }
+      else if (key === "market") { va = ca.grossUnit; vb = cb.grossUnit; }
+      else if (key === "basis") { va = ca.basis; vb = cb.basis; }
+      else if (key === "value") { va = ca.netValue; vb = cb.netValue; }
+      else if (key === "roi") { va = ca.roi == null ? -Infinity : ca.roi; vb = cb.roi == null ? -Infinity : cb.roi; }
+      else { va = ca.pl; vb = cb.pl; }
+      return (va - vb) * dir;
+    });
+    return list;
+  }
+
+  /* ---------------- render ---------------- */
+  var COLS = [
+    { key:"product", label:"Item", sort:"product" },
+    { key:"qty", label:"Units", sort:"qty" },
+    { key:"date", label:"Bought", sort:"date" },
+    { key:"msrp", label:"MSRP / u", sort:"msrp" },
+    { key:"cost", label:"Paid / u", sort:"cost" },
+    { key:"market", label:"Value / u", sort:"market" },
+    { key:"basis", label:"Cost basis", sort:"basis" },
+    { key:"value", label:"Market value", sort:"value" },
+    { key:"pl", label:"P / L", sort:"pl" },
+    { key:"roi", label:"ROI", sort:"roi" }
+  ];
+
+  function renderHead(){
+    el("headRow").innerHTML = COLS.map(function(c){
+      var active = filters.sort === c.sort;
+      var arrow = active ? '<span class="arrow">' + (filters.dir === "asc" ? "▲" : "▼") + "</span>" : "";
+      return '<th class="sortable" data-sort="' + c.sort + '" scope="col" aria-sort="' +
+        (active ? (filters.dir === "asc" ? "ascending" : "descending") : "none") + '">' +
+        esc(c.label) + " " + arrow + "</th>";
+    }).join("");
+  }
+
+  function renderRows(){
+    var list = visibleLots();
+    var body = el("rows"), foot = el("foot");
+    el("emptyState").hidden = list.length > 0;
+    el("ledger").hidden = list.length === 0;
+
+    body.innerHTML = list.map(function(l){
+      var c = calc(l);
+      var chips = '<span class="chip ' + esc(l.game) + '">' + esc(gameLabel(l.game)) + "</span>";
+      if (c.sold) chips += ' <span class="chip sold">Sold ' + esc(shortDate(l.saleDate)) + "</span>";
+      if (c.stale) chips += ' <span class="chip stale">Price ' + c.stale + "d old</span>";
+      if (c.unpriced) chips += ' <span class="chip stale">No value set</span>';
+      if (l.sample) chips += ' <span class="chip sample">Example</span>';
+
+      var sub = [];
+      if (l.set) sub.push(esc(l.set));
+      if (l.type) sub.push(esc(l.type));
+      if (l.vendor) sub.push(esc(l.vendor));
+
+      var vsMsrpNote = c.vsMsrp == null ? "" :
+        '<span class="sub-note ' + (c.vsMsrp <= 0 ? "gain" : "loss") + '">' +
+        (c.vsMsrp <= 0 ? "−" : "+") + Math.abs(c.vsMsrp * 100).toFixed(0) + "% vs MSRP</span>";
+      var holdNote = c.days != null ? '<span class="sub-note">' + c.days + "d held</span>" : "";
+      var priceNote = (!c.sold && l.pricedBy === "claude" && l.priceSamples && l.priceSamples.length)
+        ? '<span class="sub-note">avg of ' + l.priceSamples.length + " sales</span>" : "";
+      var annualNote = c.annual != null ? '<span class="sub-note">' + pct(c.annual) + "/yr</span>" : "";
+
+      return '<tr data-id="' + esc(l.id) + '" tabindex="0"' + (l.sample ? ' class="is-sample"' : "") + ">" +
+        '<td><span class="item-name">' + esc(l.product || "Untitled") + "</span>" +
+          '<span class="item-sub">' + (sub.length ? '<span>' + sub.join(" &middot; ") + "</span>" : "") + chips + "</span></td>" +
+        '<td class="num" data-label="Units">' + c.qty + "</td>" +
+        '<td class="num" data-label="Bought">' + esc(shortDate(l.date)) + holdNote + "</td>" +
+        '<td class="num" data-label="MSRP / u">' + (c.msrp > 0 ? fmt(c.msrp) : "—") + "</td>" +
+        '<td class="num" data-label="Paid / u">' + fmt(c.unitCost) + vsMsrpNote + "</td>" +
+        '<td class="num" data-label="' + (c.sold ? "Sold / u" : "Value / u") + '">' +
+          (c.grossUnit > 0 ? fmt(c.grossUnit) : "—") + priceNote + "</td>" +
+        '<td class="num mob-total" data-label="Cost basis">' + fmtBig(c.basis) + "</td>" +
+        '<td class="num" data-label="' + (c.sold ? "Net proceeds" : "Market value") + '">' +
+          (c.gross > 0 ? fmtBig(c.netValue) : "—") + "</td>" +
+        '<td class="num ' + plClass(c.pl) + '" data-label="P / L">' + (c.gross > 0 ? signed(c.pl) : "—") + "</td>" +
+        '<td class="num ' + plClass(c.pl) + '" data-label="ROI">' +
+          (c.gross > 0 && c.roi != null ? pct(c.roi) : "—") + annualNote + "</td>" +
+      "</tr>";
+    }).join("");
+
+    var t = totals(list);
+    foot.innerHTML = list.length ? "<tr>" +
+      '<td>' + list.length + " lot" + (list.length === 1 ? "" : "s") + "</td>" +
+      '<td class="num">' + t.units + "</td><td></td><td></td><td></td><td></td>" +
+      '<td class="num">' + fmtBig(t.basis) + "</td>" +
+      '<td class="num">' + fmtBig(t.value) + "</td>" +
+      '<td class="num ' + plClass(t.pl) + '">' + signed(t.pl) + "</td>" +
+      '<td class="num ' + plClass(t.pl) + '">' + (t.basis > 0 ? pct(t.pl / t.basis) : "—") + "</td>" +
+    "</tr>" : "";
+  }
+
+  function totals(list){
+    var t = { units:0, basis:0, value:0, pl:0, lots:list.length, holdDays:0, holdCount:0 };
+    list.forEach(function(l){
+      var c = calc(l);
+      t.units += c.qty; t.basis += c.basis;
+      if (c.gross > 0) { t.value += c.netValue; t.pl += c.pl; }
+      else { t.value += c.basis; }
+      if (c.days != null) { t.holdDays += c.days; t.holdCount++; }
+    });
+    return t;
+  }
+
+  function renderSummary(){
+    var all = activeLots();
+    var held = all.filter(function(l){ return (l.status || "held") !== "sold"; });
+    var sold = all.filter(function(l){ return l.status === "sold"; });
+
+    var basis = 0, value = 0, priced = 0, units = 0, unpriced = 0;
+    held.forEach(function(l){
+      var c = calc(l);
+      basis += c.basis; units += c.qty;
+      if (c.gross > 0) { value += c.netValue; priced += c.basis; }
+      else { value += c.basis; unpriced++; }
+    });
+    var unreal = value - basis;
+    var unrealPct = priced > 0 ? (value - basis) / basis : null;
+
+    var realized = 0, realizedBasis = 0;
+    sold.forEach(function(l){ var c = calc(l); realized += c.pl; realizedBasis += c.basis; });
+
+    var tiles = [
+      { k:"Cost basis · holding", v:fmtBig(basis),
+        s:held.length + " lot" + (held.length === 1 ? "" : "s") + " · " + units + " unit" + (units === 1 ? "" : "s") },
+      { k:"Market value" + (prefs.netOfFees ? " (net of fees)" : ""), v:fmtBig(value),
+        s: unpriced ? unpriced + " lot" + (unpriced === 1 ? "" : "s") + " still unpriced" : "All lots priced" },
+      { k:"Unrealized P / L", v:signed(unreal), cls:plClass(unreal), flag:true,
+        s: unrealPct == null ? "Add market values" : pct(unrealPct) + " on cost" },
+      { k:"Realized P / L", v: sold.length ? signed(realized) : "—", cls: sold.length ? plClass(realized) : "",
+        s: sold.length ? sold.length + " sale" + (sold.length === 1 ? "" : "s") + " · " +
+            (realizedBasis > 0 ? pct(realized / realizedBasis) : "—") + " after fees"
+          : "No sales logged" }
+    ];
+
+    el("summary").innerHTML = tiles.map(function(t){
+      return '<div class="tile' + (t.flag ? " flag" : "") + '">' +
+        '<div class="k">' + esc(t.k) + "</div>" +
+        '<div class="v ' + (t.cls || "") + '">' + esc(t.v) + "</div>" +
+        '<div class="s">' + esc(t.s) + "</div></div>";
+    }).join("");
+
+    var totalHeld = totals(held);
+    var avgHold = totalHeld.holdCount ? Math.round(totalHeld.holdDays / totalHeld.holdCount) : null;
+    el("metaLine").innerHTML =
+      '<label class="switch"><input type="checkbox" id="netToggle"' + (prefs.netOfFees ? " checked" : "") + ">" +
+      "<span>Value holdings net of selling fees</span></label>" +
+      '<span class="num">@ <input class="fee-input" id="feeInput" type="number" min="0" max="100" step="0.25" value="' +
+        esc(prefs.feePct) + '" aria-label="Selling fee percent">%</span>' +
+      '<span class="dot">|</span>' +
+      "<span>" + (avgHold != null ? "Average hold " + avgHold + " days" : "No holdings yet") + "</span>" +
+      '<span class="dot">|</span>' +
+      "<span>" + esc(pricingText()) + "</span>" +
+      '<button class="btn btn-ghost" id="howBtn" style="font-size:12.5px;padding:2px 8px;">How pricing works</button>' +
+      (readOnly ? '<span class="dot">|</span><span>Read-only view</span>' : "");
+
+    el("howBtn").addEventListener("click", function(){ el("howDlg").showModal(); });
+    el("netToggle").addEventListener("change", function(e){ prefs.netOfFees = e.target.checked; savePrefs(); render(); });
+    el("feeInput").addEventListener("change", function(e){
+      prefs.feePct = Math.min(100, Math.max(0, num(e.target.value)));
+      savePrefs(); render();
+    });
+  }
+
+  function pricingText(){
+    if (pricingState && pricingState.lastRun) {
+      var d = daysBetween(pricingState.lastRun, today());
+      var when = d === 0 ? "today" : d === 1 ? "yesterday" : d + " days ago";
+      return "Prices refreshed " + when;
+    }
+    var pinned = activeLots().filter(function(l){ return l.priceUrl && (l.status || "held") !== "sold"; }).length;
+    return pinned ? pinned + " lot" + (pinned === 1 ? "" : "s") + " pinned for pricing" : "No pricing run yet";
+  }
+
+  function renderProv(lot){
+    var box = el("priceProv");
+    if (!box) return;
+    var s = lot && lot.priceSamples;
+    if (!s || !s.length) {
+      box.innerHTML = (lot && lot.priceUrl)
+        ? '<div class="prov">Pinned for auto-refresh — ask Claude to <strong>run it</strong> and the price lands here.</div>'
+        : "";
+      return;
+    }
+    var avg = mean(s);
+    box.innerHTML = '<div class="prov"><div class="prov-head">Sold listings used · ' +
+      esc(shortDate(lot.pricedAt)) + "</div><ul>" +
+      s.map(function(x){
+        return "<li><span>" + esc(shortDate(x.date)) + " · " + esc(trunc(x.title || "eBay sale", 46)) +
+          '</span><span class="p">' + esc(fmt(num(x.price))) + "</span></li>";
+      }).join("") +
+      '</ul><div class="mean">Mean of ' + s.length + " → <strong>" + esc(fmt(avg)) + "</strong> per unit</div></div>";
+  }
+
+  function renderBanner(){
+    var slot = el("bannerSlot");
+    if (showingSamples()) {
+      slot.innerHTML = '<div class="banner"><strong>These four rows are examples.</strong>' +
+        "<span>They show how a lot is tracked from purchase through sale — nothing here is saved.</span>" +
+        '<span class="spacer"></span>' +
+        '<button class="btn btn-ghost" id="hideSamples">Clear examples</button>' +
+        '<button class="btn btn-primary" id="bannerAdd">+ Add your first purchase</button></div>';
+      el("hideSamples").addEventListener("click", function(){ hideSamples = true; render(); });
+      el("bannerAdd").addEventListener("click", function(){ openEditor(null); });
+      return;
+    }
+    var stale = lots.filter(function(l){ return (l.status || "held") !== "sold" && calc(l).stale; });
+    if (stale.length) {
+      slot.innerHTML = '<div class="banner"><strong>' + stale.length + " lot" + (stale.length === 1 ? "" : "s") +
+        " priced over " + STALE_DAYS + " days ago.</strong>" +
+        "<span>Open a row and re-check recent sold listings so the market value means something.</span></div>";
+      return;
+    }
+    slot.innerHTML = "";
+  }
+
+  /* ---------------- watchlist ---------------- */
+  var WATCH_COLS = [
+    { label:"Item", sort:"product" },
+    { label:"Released", sort:"release" },
+    { label:"MSRP", sort:"msrp" },
+    { label:"Market", sort:"market" },
+    { label:"× MSRP", sort:"premium" },
+    { label:"Move", sort:"move" },
+    { label:"Buy under", sort:"target" }
+  ];
+
+  function mult(n){ return isFinite(n) ? n.toFixed(1) + "×" : "—"; }
+
+  function watchCalc(w){
+    var msrp = num(w.msrp), market = num(w.market);
+    var multiple = msrp > 0 && market > 0 ? market / msrp : null;
+    var target = num(w.target);
+    var mv = movement(w);
+    var sinceRelease = w.releaseDate ? daysBetween(w.releaseDate, today()) : null;
+    var unreleased = sinceRelease != null && sinceRelease < 0;
+    var months = sinceRelease != null ? sinceRelease / 30.44 : null;
+    // Compound annual rate implied by the multiple over the time it's been out.
+    var cagr = (multiple != null && months != null && months >= 6)
+      ? Math.pow(multiple, 12 / months) - 1 : null;
+    return {
+      msrp:msrp, market:market, multiple:multiple, target:target, mv:mv,
+      hit: target > 0 && market > 0 && market <= target,
+      unreleased: unreleased, months: months, cagr: cagr,
+      untilRelease: unreleased ? -sinceRelease : null
+    };
+  }
+
+  function visibleWatch(){
+    var q = filters.q.trim().toLowerCase();
+    var list = watch.filter(function(w){
+      if (filters.game !== "all" && w.game !== filters.game) return false;
+      if (q) {
+        var hay = [w.product, w.set, w.type, w.notes, gameLabel(w.game)].join(" ").toLowerCase();
+        if (hay.indexOf(q) < 0) return false;
+      }
+      return true;
+    });
+    var dir = filters.dir === "asc" ? 1 : -1;
+    var key = filters.sort;
+    list.sort(function(a, b){
+      var ca = watchCalc(a), cb = watchCalc(b), va, vb;
+      if (key === "product") { va = (a.product||"").toLowerCase(); vb = (b.product||"").toLowerCase(); return va < vb ? -dir : va > vb ? dir : 0; }
+      if (key === "release") { va = a.releaseDate || ""; vb = b.releaseDate || ""; return va < vb ? -dir : va > vb ? dir : 0; }
+      if (key === "msrp") { va = ca.msrp; vb = cb.msrp; }
+      else if (key === "target") { va = ca.target; vb = cb.target; }
+      else if (key === "premium") { va = ca.multiple == null ? -Infinity : ca.multiple; vb = cb.multiple == null ? -Infinity : cb.multiple; }
+      else if (key === "move") {
+        va = ca.mv && ca.mv.prev ? ca.mv.prev.pct : -Infinity;
+        vb = cb.mv && cb.mv.prev ? cb.mv.prev.pct : -Infinity;
+      }
+      else { va = ca.market; vb = cb.market; }
+      return (va - vb) * dir;
+    });
+    return list;
+  }
+
+  function renderWatchHead(){
+    el("headRow").innerHTML = WATCH_COLS.map(function(c){
+      var active = filters.sort === c.sort;
+      var arrow = active ? '<span class="arrow">' + (filters.dir === "asc" ? "▲" : "▼") + "</span>" : "";
+      return '<th class="sortable" data-sort="' + c.sort + '" scope="col" aria-sort="' +
+        (active ? (filters.dir === "asc" ? "ascending" : "descending") : "none") + '">' +
+        esc(c.label) + " " + arrow + "</th>";
+    }).join("");
+  }
+
+  function renderWatchRows(){
+    var list = visibleWatch();
+    el("emptyState").hidden = list.length > 0;
+    el("ledger").hidden = list.length === 0;
+    el("foot").innerHTML = "";
+
+    el("rows").innerHTML = list.map(function(w){
+      var c = watchCalc(w);
+      var chips = '<span class="chip ' + esc(w.game) + '">' + esc(gameLabel(w.game)) + "</span>";
+      if (c.unreleased) chips += ' <span class="chip">Out in ' + c.untilRelease + "d</span>";
+      if (c.hit) chips += ' <span class="chip" style="border-color:var(--gain);color:var(--gain);">At your price</span>';
+      var sub = [];
+      if (w.set) sub.push(esc(w.set));
+      if (w.type) sub.push(esc(w.type));
+
+      var moveCell = "—", moveCls = "muted";
+      if (c.mv && c.mv.prev) {
+        moveCls = plClass(c.mv.prev.d);
+        moveCell = pct(c.mv.prev.pct) + '<span class="sub-note">' + signed(c.mv.prev.d) + " since " + esc(shortDate(c.mv.prev.date)) + "</span>";
+      } else if (c.market > 0) {
+        moveCell = '<span class="muted">first read</span>';
+      }
+
+      var ageNote = c.unreleased
+        ? '<span class="sub-note">in ' + c.untilRelease + "d</span>"
+        : (c.months != null ? '<span class="sub-note">' + Math.round(c.months) + "mo old</span>" : "");
+      var cagrNote = c.cagr != null ? '<span class="sub-note">' + pct(c.cagr) + "/yr</span>" : "";
+
+      return '<tr data-id="' + esc(w.id) + '" tabindex="0">' +
+        '<td><span class="item-name">' + esc(w.product || "Untitled") + "</span>" +
+          '<span class="item-sub">' + (sub.length ? "<span>" + sub.join(" &middot; ") + "</span>" : "") + chips + "</span></td>" +
+        '<td class="num" data-label="Released">' + esc(shortDate(w.releaseDate)) + ageNote + "</td>" +
+        '<td class="num" data-label="MSRP">' + (c.msrp > 0 ? fmt(c.msrp) : "—") + "</td>" +
+        '<td class="num" data-label="Market">' + (c.market > 0 ? fmt(c.market) : "—") +
+          (w.pricedBy === "claude" && w.priceSamples && w.priceSamples.length
+            ? '<span class="sub-note">avg of ' + w.priceSamples.length + " sales</span>" : "") + "</td>" +
+        '<td class="num ' + (c.multiple == null ? "" : (c.multiple >= 1 ? "gain" : "loss")) + '" data-label="× MSRP">' +
+          (c.multiple == null ? "—" : mult(c.multiple)) + cagrNote + "</td>" +
+        '<td class="num ' + moveCls + '" data-label="Move">' + moveCell + "</td>" +
+        '<td class="num" data-label="Buy under">' + (c.target > 0 ? fmt(c.target) : "—") + "</td>" +
+      "</tr>";
+    }).join("");
+  }
+
+  function renderWatchSummary(){
+    var list = watch;
+    var priced = list.filter(function(w){ return num(w.market) > 0 && num(w.msrp) > 0; });
+    var avgMult = priced.length
+      ? priced.reduce(function(a, w){ return a + (num(w.market) / num(w.msrp)); }, 0) / priced.length
+      : null;
+    var best = null;
+    priced.forEach(function(w){
+      var m = num(w.market) / num(w.msrp);
+      if (!best || m > best.m) best = { m:m, name:w.product };
+    });
+
+    var mover = null;
+    list.forEach(function(w){
+      var mv = movement(w);
+      if (mv && mv.prev && (!mover || Math.abs(mv.prev.pct) > Math.abs(mover.pct))) {
+        mover = { name:w.product, pct:mv.prev.pct };
+      }
+    });
+    var atPrice = list.filter(function(w){ return watchCalc(w).hit; }).length;
+    var upcoming = list.filter(function(w){ return watchCalc(w).unreleased; }).length;
+
+    var tiles = [
+      { k:"Tracking", v:String(list.length),
+        s: upcoming ? upcoming + " not out yet" : priced.length + " priced" },
+      { k:"Average multiple", v: avgMult == null ? "—" : mult(avgMult), cls:"gain",
+        s: priced.length + " of " + list.length + " priced" },
+      { k:"Best performer", v: best ? mult(best.m) : "—", cls: best ? "gain" : "",
+        s: best ? trunc(best.name, 30) : "Nothing priced yet" },
+      { k: atPrice ? "At your buy price" : "Biggest move", flag:true,
+        v: atPrice ? String(atPrice) : (mover ? pct(mover.pct) : "—"),
+        cls: atPrice ? "gain" : (mover ? plClass(mover.pct) : ""),
+        s: atPrice ? "Worth a look" : (mover ? trunc(mover.name, 30) : "Needs a second pricing run") }
+    ];
+
+    el("summary").innerHTML = tiles.map(function(t){
+      return '<div class="tile' + (t.flag ? " flag" : "") + '">' +
+        '<div class="k">' + esc(t.k) + "</div>" +
+        '<div class="v ' + (t.cls || "") + '">' + esc(t.v) + "</div>" +
+        '<div class="s">' + esc(t.s) + "</div></div>";
+    }).join("");
+
+    el("metaLine").innerHTML =
+      "<span>Watchlist carries no position — it's here to compare against what you own.</span>" +
+      '<span class="dot">|</span><span>' + esc(pricingText()) + "</span>" +
+      '<button class="btn btn-ghost" id="howBtn" style="font-size:12.5px;padding:2px 8px;">How pricing works</button>';
+    el("howBtn").addEventListener("click", function(){ el("howDlg").showModal(); });
+  }
+
+  function renderTabs(){
+    var tabs = el("viewTabs");
+    [].forEach.call(tabs.children, function(b){
+      b.setAttribute("aria-pressed", String(b.dataset.view === view));
+    });
+    tabs.children[0].innerHTML = "Portfolio" + (activeLots().length ? '<span class="count">' + activeLots().length + "</span>" : "");
+    tabs.children[1].innerHTML = "Watchlist" + (watch.length ? '<span class="count">' + watch.length + "</span>" : "");
+    el("addBtn").textContent = view === "watch" ? "+ Add to watchlist" : "+ Add purchase";
+    el("statusSeg").hidden = view === "watch";
+    var es = el("emptyState");
+    es.querySelector("h3").textContent = view === "watch" ? "Nothing on the watchlist" : "Nothing here yet";
+    es.querySelector("p").textContent = view === "watch"
+      ? "Add products you want to follow without buying. Claude prices them on the same run as your holdings."
+      : "Add a purchase to start tracking cost basis against current market value.";
+  }
+
+  function render(){
+    renderTabs();
+    if (view === "watch") {
+      renderWatchSummary();
+      el("bannerSlot").innerHTML = "";
+      renderWatchHead();
+      renderWatchRows();
+      return;
+    }
+    renderSummary(); renderBanner(); renderHead(); renderRows();
+  }
+
+  /* ---------------- storage ---------------- */
+  var LS_KEY = "sealed-ledger-v1";
+  function localRead(){
+    try { return JSON.parse(localStorage.getItem(LS_KEY) || "[]") || []; } catch (e) { return []; }
+  }
+  function localWrite(){
+    try { localStorage.setItem(LS_KEY, JSON.stringify(lots)); } catch (e) {}
+  }
+  function localPrefsRead(){
+    try {
+      var p = JSON.parse(localStorage.getItem(LS_KEY + "-prefs") || "null");
+      if (p) prefs = { feePct: num(p.feePct) || DEFAULT_FEE, netOfFees: !!p.netOfFees };
+    } catch (e) {}
+  }
+  function savePrefs(){
+    if (db && !readOnly) {
+      db.doc("settings/prefs").set({ feePct: prefs.feePct, netOfFees: prefs.netOfFees })["catch"](function(){});
+    }
+    try { localStorage.setItem(LS_KEY + "-prefs", JSON.stringify(prefs)); } catch (e) {}
+  }
+
+  function newId(){
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return "l" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  function persist(lot){
+    if (db && !readOnly) {
+      var body = {};
+      Object.keys(lot).forEach(function(k){ if (k !== "id" && k !== "sample") body[k] = lot[k]; });
+      return db.collection("lots").doc(lot.id).set(body)["catch"](function(err){
+        if (err && err.code === "invalid_argument") { readOnly = true; toast("This view can't save changes."); render(); }
+        else toast("Couldn't save — try again.");
+      });
+    }
+    var i = lots.findIndex(function(l){ return l.id === lot.id; });
+    if (i < 0) lots.push(lot); else lots[i] = lot;
+    localWrite(); render();
+    return Promise.resolve();
+  }
+
+  function removeLot(id){
+    if (db && !readOnly) return db.collection("lots").doc(id)["delete"]()["catch"](function(){ toast("Couldn't delete — try again."); });
+    lots = lots.filter(function(l){ return l.id !== id; });
+    localWrite(); render();
+    return Promise.resolve();
+  }
+
+  var toastTimer = null;
+  function toast(msg){
+    var old = document.querySelector(".toast");
+    if (old) old.remove();
+    var t = document.createElement("div");
+    t.className = "toast"; t.setAttribute("role", "status"); t.textContent = msg;
+    document.body.appendChild(t);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.remove(); }, 2600);
+  }
+
+  /* ---------------- editor ---------------- */
+  var dlg = el("editor"), form = el("editorForm");
+
+  function openEditor(lot){
+    editingId = lot ? lot.id : null;
+    var isNew = !lot;
+    el("dlgTitle").textContent = isNew ? "Add purchase" : "Edit lot";
+    el("deleteBtn").hidden = isNew || !!(lot && lot.sample);
+    el("saveBtn").textContent = lot && lot.sample ? "Save as my entry" : "Save entry";
+
+    var d = lot || { game:"pokemon", type:"Elite Trainer Box", date:today(), qty:1, status:"held", marketAsOf:today() };
+    el("f-product").value = d.product || "";
+    el("f-game").value = d.game || "pokemon";
+    el("f-type").value = d.type || "Elite Trainer Box";
+    el("f-set").value = d.set || "";
+    el("f-vendor").value = d.vendor || "";
+    el("f-date").value = d.date || today();
+    el("f-qty").value = d.qty != null ? d.qty : 1;
+    el("f-msrp").value = d.msrp != null ? d.msrp : "";
+    el("f-cost").value = d.cost != null ? d.cost : "";
+    el("f-ship").value = d.shipping != null ? d.shipping : "";
+    el("f-status").value = d.status || "held";
+    el("f-market").value = d.market != null ? d.market : "";
+    el("f-asof").value = d.marketAsOf || (isNew ? today() : "");
+    el("f-saledate").value = d.saleDate || today();
+    el("f-saleprice").value = d.salePrice != null ? d.salePrice : "";
+    el("f-fee").value = d.feePct != null ? d.feePct : prefs.feePct;
+    el("f-soldqty").value = d.qty != null ? d.qty : 1;
+    el("f-priceurl").value = d.priceUrl || "";
+    el("f-notes").value = d.notes || "";
+
+    renderProv(lot);
+    syncSections();
+    dlg.showModal();
+    el("f-product").focus();
+  }
+
+  function syncSections(){
+    var sold = el("f-status").value === "sold";
+    el("saleSection").hidden = !sold;
+    el("marketSection").hidden = sold;
+    var qty = Math.max(1, Math.round(num(el("f-qty").value) || 1));
+    var split = sold && qty > 1;
+    el("splitField").hidden = !split;
+    if (split) {
+      el("f-soldqty").max = qty;
+      el("splitHint").textContent = "Selling fewer than " + qty + " splits this into a sold lot and a remaining lot.";
+    }
+    renderLookup();
+    renderReadout();
+  }
+
+  function renderLookup(){
+    var name = el("f-product").value.trim();
+    var box = el("lookup");
+    if (!name) { box.innerHTML = '<span class="hint">Type a product name to get price-check links.</span>'; return; }
+    var q = encodeURIComponent(name);
+    box.innerHTML =
+      '<a target="_blank" rel="noopener noreferrer" href="https://www.ebay.com/sch/i.html?_nkw=' + q +
+        '&LH_Sold=1&LH_Complete=1&_sop=13">eBay sold listings ↗</a>' +
+      '<a target="_blank" rel="noopener noreferrer" href="https://www.tcgplayer.com/search/all/product?q=' + q +
+        '&productLineName=' + (el("f-game").value === "onepiece" ? "one-piece-card-game" : "pokemon") + '">TCGplayer ↗</a>' +
+      '<a target="_blank" rel="noopener noreferrer" href="https://www.pricecharting.com/search-products?q=' + q +
+        '&type=prices">PriceCharting ↗</a>';
+  }
+
+  function renderReadout(){
+    var draft = readForm();
+    var c = calc(draft);
+    var rows = [
+      { k:"Cost basis", v:fmtBig(c.basis), cls:"" },
+      { k: c.sold ? "Net proceeds" : "Market value", v: c.gross > 0 ? fmtBig(c.netValue) : "—", cls:"" },
+      { k: c.sold ? "Realized P / L" : "Unrealized P / L", v: c.gross > 0 ? signed(c.pl) : "—", cls:plClass(c.pl) },
+      { k:"Paid vs MSRP", v: c.vsMsrp == null ? "—" : pct(c.vsMsrp), cls: c.vsMsrp == null ? "" : (c.vsMsrp <= 0 ? "gain" : "loss") },
+      { k:"ROI", v: c.gross > 0 && c.roi != null ? pct(c.roi) : "—", cls:plClass(c.pl) },
+      { k:"Held", v: c.days != null ? c.days + " days" : "—", cls:"" }
+    ];
+    el("readout").innerHTML = rows.map(function(r){
+      return "<div><span class=\"k\">" + esc(r.k) + '</span><span class="v ' + r.cls + '">' + esc(r.v) + "</span></div>";
+    }).join("");
+  }
+
+  function readForm(){
+    return {
+      id: editingId || "draft",
+      product: el("f-product").value.trim(),
+      game: el("f-game").value,
+      type: el("f-type").value,
+      set: el("f-set").value.trim(),
+      vendor: el("f-vendor").value.trim(),
+      date: el("f-date").value,
+      qty: Math.max(1, Math.round(num(el("f-qty").value) || 1)),
+      msrp: el("f-msrp").value === "" ? null : num(el("f-msrp").value),
+      cost: num(el("f-cost").value),
+      shipping: el("f-ship").value === "" ? 0 : num(el("f-ship").value),
+      status: el("f-status").value,
+      market: el("f-market").value === "" ? null : num(el("f-market").value),
+      marketAsOf: el("f-asof").value || null,
+      saleDate: el("f-saledate").value || null,
+      salePrice: el("f-saleprice").value === "" ? null : num(el("f-saleprice").value),
+      feePct: el("f-fee").value === "" ? prefs.feePct : num(el("f-fee").value),
+      priceUrl: el("f-priceurl").value.trim() || null,
+      notes: el("f-notes").value.trim()
+    };
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = readForm();
+    if (!d.product) { el("f-product").focus(); return; }
+
+    var existing = lots.find(function(l){ return l.id === editingId; });
+    var isSampleEdit = !existing && editingId;
+    d.id = (existing ? existing.id : newId());
+    if (isSampleEdit) d.id = newId();
+
+    // Keep Claude's pricing receipts only while the value it wrote is untouched.
+    if (existing && num(existing.market) === num(d.market) && d.status !== "sold") {
+      d.priceSamples = existing.priceSamples || null;
+      d.pricedBy = existing.pricedBy || null;
+      d.pricedAt = existing.pricedAt || null;
+    } else {
+      d.priceSamples = null;
+      d.pricedBy = d.market != null ? "you" : null;
+      d.pricedAt = d.market != null ? (d.marketAsOf || today()) : null;
+    }
+
+    var totalQty = d.qty;
+    var soldQty = d.status === "sold" ? Math.max(1, Math.min(totalQty, Math.round(num(el("f-soldqty").value) || totalQty))) : totalQty;
+
+    if (d.status === "sold" && soldQty < totalQty) {
+      var remaining = JSON.parse(JSON.stringify(d));
+      remaining.id = newId();
+      remaining.status = "held";
+      remaining.qty = totalQty - soldQty;
+      remaining.shipping = num(d.shipping) * (remaining.qty / totalQty);
+      remaining.saleDate = null; remaining.salePrice = null;
+      d.qty = soldQty;
+      d.shipping = num(d.shipping) * (soldQty / totalQty);
+      persist(d).then(function(){ return persist(remaining); }).then(function(){
+        toast("Split into a sold lot and " + remaining.qty + " still held.");
+      });
+    } else {
+      persist(d).then(function(){ toast(existing ? "Entry updated." : "Entry added."); });
+    }
+    dlg.close();
+  });
+
+  el("deleteBtn").addEventListener("click", function(){
+    if (!editingId) return;
+    var lot = lots.find(function(l){ return l.id === editingId; });
+    if (!lot) { dlg.close(); return; }
+    if (!confirm("Delete “" + (lot.product || "this lot") + "” from the ledger? This can't be undone.")) return;
+    removeLot(editingId).then(function(){ toast("Entry deleted."); });
+    dlg.close();
+  });
+
+  el("cancelBtn").addEventListener("click", function(){ dlg.close(); });
+  el("dlgClose").addEventListener("click", function(){ dlg.close(); });
+  el("howClose").addEventListener("click", function(){ el("howDlg").close(); });
+  el("howOk").addEventListener("click", function(){ el("howDlg").close(); });
+  el("f-priceurl").addEventListener("input", function(){
+    if (editingId) return;
+    renderProv({ priceUrl: el("f-priceurl").value.trim() });
+  });
+  ["f-status", "f-qty"].forEach(function(id){ el(id).addEventListener("change", syncSections); });
+  ["f-product", "f-game"].forEach(function(id){ el(id).addEventListener("input", renderLookup); });
+  ["f-qty", "f-cost", "f-ship", "f-msrp", "f-market", "f-saleprice", "f-fee", "f-date", "f-saledate"].forEach(function(id){
+    el(id).addEventListener("input", renderReadout);
+  });
+
+  /* ---------------- watchlist editor ---------------- */
+  var wDlg = el("watchDlg"), editingWatchId = null;
+
+  function openWatch(item){
+    editingWatchId = item ? item.id : null;
+    el("watchTitle").textContent = item ? "Edit watched item" : "Add to watchlist";
+    el("watchDelete").hidden = !item;
+    var d = item || { game:"onepiece", type:"Booster Box" };
+    el("w-product").value = d.product || "";
+    el("w-game").value = d.game || "onepiece";
+    el("w-type").value = d.type || "Booster Box";
+    el("w-set").value = d.set || "";
+    el("w-msrp").value = d.msrp != null ? d.msrp : "";
+    el("w-market").value = d.market != null ? d.market : "";
+    el("w-target").value = d.target != null ? d.target : "";
+    el("w-release").value = d.releaseDate || "";
+    el("w-priceurl").value = d.priceUrl || "";
+    el("w-notes").value = d.notes || "";
+    renderWatchProv(item);
+    renderWatchLookup();
+    wDlg.showModal();
+    el("w-product").focus();
+  }
+
+  function renderWatchLookup(){
+    var name = el("w-product").value.trim();
+    var box = el("watchLookup");
+    if (!name) { box.innerHTML = '<span class="hint">Type a name to get price-check links.</span>'; return; }
+    var q = encodeURIComponent(name);
+    box.innerHTML =
+      '<a target="_blank" rel="noopener noreferrer" href="https://www.ebay.com/sch/i.html?_nkw=' + q +
+        '&LH_Sold=1&LH_Complete=1&_sop=13">eBay sold listings ↗</a>' +
+      '<a target="_blank" rel="noopener noreferrer" href="https://www.pricecharting.com/search-products?q=' + q +
+        '&type=prices">PriceCharting ↗</a>';
+  }
+
+  function renderWatchProv(item){
+    var box = el("watchProv");
+    if (!item) { box.innerHTML = ""; return; }
+    var h = (item.priceHistory || []).filter(function(p){ return num(p.price) > 0; });
+    if (!h.length) { box.innerHTML = ""; return; }
+    var recent = h.slice(-6).reverse();
+    box.innerHTML = '<div class="prov"><div class="prov-head">Price history · ' + h.length + " reading" +
+      (h.length === 1 ? "" : "s") + "</div><ul>" +
+      recent.map(function(p){
+        return "<li><span>" + esc(shortDate(p.date)) + (p.note ? " · " + esc(trunc(p.note, 30)) : "") +
+          '</span><span class="p">' + esc(fmt(num(p.price))) + "</span></li>";
+      }).join("") + "</ul></div>";
+  }
+
+  el("watchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = el("w-product").value.trim();
+    if (!name) { el("w-product").focus(); return; }
+    var existing = watch.find(function(w){ return w.id === editingWatchId; });
+    var d = {
+      id: existing ? existing.id : newId(),
+      product: name,
+      game: el("w-game").value,
+      type: el("w-type").value,
+      set: el("w-set").value.trim(),
+      msrp: el("w-msrp").value === "" ? null : num(el("w-msrp").value),
+      market: el("w-market").value === "" ? null : num(el("w-market").value),
+      target: el("w-target").value === "" ? null : num(el("w-target").value),
+      releaseDate: el("w-release").value || null,
+      priceUrl: el("w-priceurl").value.trim() || null,
+      notes: el("w-notes").value.trim(),
+      priceHistory: (existing && existing.priceHistory) || [],
+      priceSamples: (existing && existing.priceSamples) || null,
+      pricedBy: existing ? existing.pricedBy : null,
+      pricedAt: existing ? existing.pricedAt : null,
+      marketAsOf: existing ? existing.marketAsOf : null
+    };
+    if (!existing || num(existing.market) !== num(d.market)) {
+      d.pricedBy = d.market != null ? "you" : null;
+      d.pricedAt = d.market != null ? today() : null;
+      d.marketAsOf = d.market != null ? today() : null;
+      d.priceSamples = null;
+      if (d.market != null) d.priceHistory = d.priceHistory.concat([{ date: today(), price: d.market, note: "manual" }]);
+    }
+    persistWatch(d).then(function(){ toast(existing ? "Watchlist updated." : "Added to watchlist."); });
+    wDlg.close();
+  });
+
+  el("watchDelete").addEventListener("click", function(){
+    if (!editingWatchId) return;
+    var item = watch.find(function(w){ return w.id === editingWatchId; });
+    if (!item) { wDlg.close(); return; }
+    if (!confirm("Remove “" + (item.product || "this item") + "” from the watchlist?")) return;
+    removeWatch(editingWatchId).then(function(){ toast("Removed from watchlist."); });
+    wDlg.close();
+  });
+  el("watchCancel").addEventListener("click", function(){ wDlg.close(); });
+  el("watchClose").addEventListener("click", function(){ wDlg.close(); });
+  el("w-product").addEventListener("input", renderWatchLookup);
+
+  function persistWatch(item){
+    if (db && !readOnly) {
+      var body = {};
+      Object.keys(item).forEach(function(k){ if (k !== "id") body[k] = item[k]; });
+      return db.collection("watch").doc(item.id).set(body)["catch"](function(){ toast("Couldn't save — try again."); });
+    }
+    var i = watch.findIndex(function(w){ return w.id === item.id; });
+    if (i < 0) watch.push(item); else watch[i] = item;
+    localWriteWatch(); render();
+    return Promise.resolve();
+  }
+  function removeWatch(id){
+    if (db && !readOnly) return db.collection("watch").doc(id)["delete"]()["catch"](function(){ toast("Couldn't remove."); });
+    watch = watch.filter(function(w){ return w.id !== id; });
+    localWriteWatch(); render();
+    return Promise.resolve();
+  }
+  function localWriteWatch(){
+    try { localStorage.setItem(LS_KEY + "-watch", JSON.stringify(watch)); } catch (e) {}
+  }
+  function localReadWatch(){
+    try { return JSON.parse(localStorage.getItem(LS_KEY + "-watch") || "[]") || []; } catch (e) { return []; }
+  }
+
+  /* ---------------- wiring ---------------- */
+  el("viewTabs").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-view]");
+    if (!b || b.dataset.view === view) return;
+    view = b.dataset.view;
+    filters.q = ""; el("search").value = "";
+    filters.sort = view === "watch" ? "release" : "date";
+    filters.dir = "desc";
+    render();
+  });
+
+  el("addBtn").addEventListener("click", function(){
+    if (view === "watch") openWatch(null); else openEditor(null);
+  });
+
+  function activateRow(tr){
+    if (!tr) return;
+    if (view === "watch") {
+      var w = watch.find(function(x){ return x.id === tr.dataset.id; });
+      if (w) openWatch(w);
+      return;
+    }
+    var lot = activeLots().find(function(l){ return l.id === tr.dataset.id; });
+    if (lot) openEditor(lot);
+  }
+  el("rows").addEventListener("click", function(e){ activateRow(e.target.closest("tr[data-id]")); });
+  el("rows").addEventListener("keydown", function(e){
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var tr = e.target.closest("tr[data-id]");
+    if (!tr) return;
+    e.preventDefault();
+    activateRow(tr);
+  });
+
+  el("headRow").addEventListener("click", function(e){
+    var th = e.target.closest("th[data-sort]");
+    if (!th) return;
+    var key = th.dataset.sort;
+    if (filters.sort === key) filters.dir = filters.dir === "asc" ? "desc" : "asc";
+    else { filters.sort = key; filters.dir = (key === "product") ? "asc" : "desc"; }
+    render();
+  });
+
+  el("statusSeg").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-status]");
+    if (!b) return;
+    filters.status = b.dataset.status;
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+    render();
+  });
+  el("gameSeg").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-game]");
+    if (!b) return;
+    filters.game = b.dataset.game;
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", String(x === b)); });
+    render();
+  });
+  el("search").addEventListener("input", function(e){
+    filters.q = e.target.value;
+    if (view === "watch") renderWatchRows(); else renderRows();
+  });
+
+  /* ---------------- CSV ---------------- */
+  function csvCell(v){
+    var s = v == null ? "" : String(v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  function buildCsv(){
+    var head = ["Product","Game","Set","Type","Vendor","Date bought","Units","MSRP per unit",
+      "Paid per unit","Shipping+tax total","All-in per unit","Cost basis","Status",
+      "Market or sale per unit","Priced on","Date sold","Fee %","Market value / net proceeds",
+      "P/L","ROI %","Days held","Priced by","Price source","Notes"];
+    var rows = activeLots().map(function(l){
+      var c = calc(l);
+      return [l.product, gameLabel(l.game), l.set, l.type, l.vendor, l.date, c.qty,
+        c.msrp || "", num(l.cost).toFixed(2), num(l.shipping).toFixed(2), c.unitCost.toFixed(2),
+        c.basis.toFixed(2), c.sold ? "Sold" : "Holding", c.grossUnit || "",
+        l.marketAsOf || "", l.saleDate || "", c.sold ? (l.feePct != null ? l.feePct : prefs.feePct) : (prefs.netOfFees ? prefs.feePct : 0),
+        c.gross > 0 ? c.netValue.toFixed(2) : "", c.gross > 0 ? c.pl.toFixed(2) : "",
+        c.gross > 0 && c.roi != null ? (c.roi * 100).toFixed(2) : "", c.days == null ? "" : c.days,
+        l.pricedBy === "claude" ? "Claude · avg of " + ((l.priceSamples || []).length || 0) + " eBay sales" : (l.pricedBy === "you" ? "Manual" : ""),
+        l.priceUrl || "", l.notes
+      ].map(csvCell).join(",");
+    });
+    return head.map(csvCell).join(",") + "\n" + rows.join("\n") + "\n";
+  }
+  function buildWatchCsv(){
+    var head = ["Set","Product","Game","Type","Release date","Months out","MSRP",
+      "Current market","Multiple","Change since last read","Buy under","Priced by","Price source","Notes"];
+    var rows = visibleWatch().map(function(w){
+      var c = watchCalc(w);
+      return [w.set, w.product, gameLabel(w.game), w.type, w.releaseDate || "",
+        c.months == null ? "" : Math.round(c.months), c.msrp || "", c.market || "",
+        c.multiple == null ? "" : c.multiple.toFixed(2),
+        c.mv && c.mv.prev ? c.mv.prev.d.toFixed(2) : "",
+        c.target || "", w.pricedBy === "claude" ? "Claude" : (w.pricedBy === "you" ? "Manual" : ""),
+        w.priceUrl || "", w.notes
+      ].map(csvCell).join(",");
+    });
+    return head.map(csvCell).join(",") + "\n" + rows.join("\n") + "\n";
+  }
+
+  el("exportBtn").addEventListener("click", function(){
+    if (!downloads) return;
+    var watchView = view === "watch";
+    downloads.save({
+      filename: (watchView ? "watchlist-" : "sealed-ledger-") + today() + ".csv",
+      data: watchView ? buildWatchCsv() : buildCsv()
+    })["catch"](function(err){
+      if (err && err.code === "declined") return;
+      toast("Export didn't go through.");
+    });
+  });
+
+  /* ---------------- boot ---------------- */
+  localPrefsRead();
+  render();
+  fetch("data.json",{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){
+    lots=(d&&d.lots)||[]; watch=(d&&d.watch)||[];
+    if(d&&d.prefs) prefs=d.prefs;
+    if(d&&d.pricing) pricingState=d.pricing;
+    storeReady=true; hideSamples=true; readOnly=true;
+    var _a=el("addBtn"); if(_a) _a.hidden=true;
+    var _s=el("subtitle");
+    if(_s) _s.textContent="Live collection - data as of "+((d&&d.generatedAt)||"-");
+    render();
+  });
+  return;
+
+  (function connect(){
+    var c = window.claude;
+    if (!c || typeof c.use !== "function") {
+      lots = localRead(); watch = localReadWatch(); storeReady = true; render();
+      return;
+    }
+    c.use("downloads").then(function(d){ downloads = d; el("exportBtn").hidden = !d; })["catch"](function(){});
+
+    c.use("user").then(function(u){
+      if (!u) return;
+      var w = u.can && u.can("data.write");
+      return Promise.resolve(w).then(function(allowed){ if (allowed === false) { readOnly = true; render(); } });
+    })["catch"](function(){});
+
+    c.use("db").then(function(d){
+      if (!d) { lots = localRead(); watch = localReadWatch(); storeReady = true; render(); return; }
+      db = d;
+      db.collection("lots").onSnapshot(function(snap){
+        lots = snap.docs.map(function(doc){
+          var body = doc.data() || {};
+          var o = { id: doc.id };
+          Object.keys(body).forEach(function(k){ o[k] = body[k]; });
+          return o;
+        });
+        storeReady = true;
+        render();
+      }, function(){
+        db = null; lots = localRead(); watch = localReadWatch(); storeReady = true; render();
+      });
+      db.collection("watch").onSnapshot(function(snap){
+        watch = snap.docs.map(function(doc){
+          var body = doc.data() || {};
+          var o = { id: doc.id };
+          Object.keys(body).forEach(function(k){ o[k] = body[k]; });
+          return o;
+        });
+        render();
+      }, function(){ watch = localReadWatch(); render(); });
+      db.doc("meta/pricing").onSnapshot(function(snap){
+        pricingState = snap.exists ? (snap.data() || null) : null;
+        render();
+      }, function(){});
+      db.doc("settings/prefs").onSnapshot(function(snap){
+        if (snap.exists) {
+          var p = snap.data() || {};
+          if (p.feePct != null) prefs.feePct = num(p.feePct);
+          if (p.netOfFees != null) prefs.netOfFees = !!p.netOfFees;
+          render();
+        }
+      }, function(){});
+    })["catch"](function(){
+      lots = localRead(); watch = localReadWatch(); storeReady = true; render();
+    });
+
+    setTimeout(function(){ if (!storeReady) { storeReady = true; render(); } }, 11000);
+  })();
+})();
+</script>
+
+<script>(function(){var h=document.querySelector(".masthead");if(!h)return;var b=document.createElement("button");b.className="btn btn-primary";b.textContent="Refresh";b.onclick=function(){location.reload();};h.appendChild(b);})();</script>
+</body></html>
