@@ -1,6 +1,6 @@
 {
  "failed": 0,
- "generatedAt": "2026-09-21",
+ "generatedAt": "2026-09-22",
  "items": {
   "db-fusion-fb01": {
    "basis": "headline",
@@ -135,24 +135,24 @@
    "bucket": "watch",
    "headline": 448.49,
    "market": 448.49,
-   "mean3": 443.64,
+   "mean3": 449.95,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-12",
+     "date": "2026-09-20",
      "price": 449.95,
      "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-10",
-     "price": 440.99,
+     "date": "2026-09-16",
+     "price": 449.95,
      "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-09",
-     "price": 439.99,
+     "date": "2026-09-12",
+     "price": 449.95,
      "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -551,25 +551,25 @@
    "bucket": "watch",
    "headline": 134.07,
    "market": 134.07,
-   "mean3": 256.61,
-   "salesAvailable": 15,
+   "mean3": 134.92,
+   "salesAvailable": 18,
    "samples": [
     {
-     "date": "2026-09-16",
+     "date": "2026-09-21",
      "price": 134.92,
      "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-12",
+     "date": "2026-09-19",
      "price": 134.92,
      "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-08-27",
-     "price": 499.99,
-     "title": "Disney Lorcana: Ursula's Return Booster Box Case Unopened English [TCGPlayer]",
+     "date": "2026-09-18",
+     "price": 134.92,
+     "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
    ],
