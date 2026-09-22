@@ -1,0 +1,52 @@
+# Scrapes PriceCharting and commits prices.json.
+#
+# Why this exists: the weekly Claude routine that re-prices the ledger runs in a
+# cloud sandbox with all outbound HTTPS blocked, so it cannot reach
+# PriceCharting itself. GitHub Actions runners do have network access, and the
+# sandbox CAN reach GitHub - so the scraping happens here and the routine reads
+# the committed prices.json out of this repo.
+#
+# Timing: this runs at 15:00 UTC Monday, one hour before the routine's 16:00 UTC
+# Monday fire. Both crons are fixed UTC, so that ordering holds year round and
+# does not drift with daylight saving.
+
+name: Scrape prices
+
+on:
+  schedule:
+    - cron: "0 15 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape-prices
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scrape PriceCharting
+        run: python3 scripts/scrape_prices.py
+
+      - name: Commit prices.json
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- prices.json; then
+            echo "prices.json unchanged - nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prices.json
+          git commit -m "Scrape prices $(date -u +%Y-%m-%d)"
+          git push
