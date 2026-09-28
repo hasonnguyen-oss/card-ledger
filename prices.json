@@ -271,7 +271,7 @@
   "etb-30th-celebration": {
    "basis": "mean3",
    "bucket": "lots",
-   "headline": 158.55,
+   "headline": 165.0,
    "market": 166.32,
    "mean3": 166.32,
    "salesAvailable": 23,
@@ -527,8 +527,8 @@
   "lorcana-reign-of-jafar": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 149.99,
-   "market": 149.99,
+   "headline": 164.13,
+   "market": 164.13,
    "mean3": 153.95,
    "salesAvailable": 30,
    "samples": [
@@ -559,8 +559,8 @@
   "lorcana-shimmering-skies": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 140.98,
-   "market": 140.98,
+   "headline": 142.32,
+   "market": 142.32,
    "mean3": 146.55,
    "salesAvailable": 27,
    "samples": [
@@ -594,7 +594,7 @@
    "headline": 134.92,
    "market": 134.92,
    "mean3": 119.95,
-   "salesAvailable": 21,
+   "salesAvailable": 18,
    "samples": [
     {
      "date": "2026-09-26",
@@ -1508,8 +1508,8 @@
   "pkmn-30th-pc-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 301.97,
-   "market": 301.97,
+   "headline": 310.0,
+   "market": 310.0,
    "mean3": 319.16,
    "salesAvailable": 25,
    "samples": [
