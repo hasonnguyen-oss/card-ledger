@@ -369,24 +369,24 @@
    "bucket": "watch",
    "headline": 119.95,
    "market": 119.95,
-   "mean3": 119.45,
-   "salesAvailable": 9,
+   "mean3": 119.95,
+   "salesAvailable": 12,
    "samples": [
     {
-     "date": "2026-09-29",
+     "date": "2026-10-05",
      "price": 119.94,
      "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-27",
+     "date": "2026-10-04",
      "price": 119.95,
      "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-24",
-     "price": 118.46,
+     "date": "2026-10-03",
+     "price": 119.95,
      "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1666,8 +1666,8 @@
   "pkmn-shining-fates-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 136.75,
-   "market": 136.75,
+   "headline": 136.59,
+   "market": 136.59,
    "mean3": 140.03,
    "salesAvailable": 31,
    "samples": [
