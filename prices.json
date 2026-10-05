@@ -1,30 +1,30 @@
 {
  "failed": 0,
- "generatedAt": "2026-09-28",
+ "generatedAt": "2026-10-05",
  "items": {
   "db-fusion-fb01": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 274.49,
-   "market": 274.49,
-   "mean3": 269.67,
+   "headline": 363.67,
+   "market": 363.67,
+   "mean3": 332.67,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-09-27",
+     "price": 364.0,
+     "title": "Awakened Pulse Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-21",
+     "price": 365.0,
+     "title": "Awakened Pulse Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-04-30",
      "price": 269.0,
-     "title": "Awakened Pulse Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-04-28",
-     "price": 270.0,
-     "title": "Awakened Pulse Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-04-27",
-     "price": 270.0,
      "title": "Awakened Pulse Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -103,9 +103,15 @@
    "bucket": "watch",
    "headline": 260.85,
    "market": 260.85,
-   "mean3": 260.86,
+   "mean3": 260.53,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-09-26",
+     "price": 259.89,
+     "title": "Saiyan's Pride Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-15",
      "price": 260.84,
@@ -115,12 +121,6 @@
     {
      "date": "2026-09-11",
      "price": 260.87,
-     "title": "Saiyan's Pride Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-09",
-     "price": 260.86,
      "title": "Saiyan's Pride Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -133,26 +133,26 @@
   "db-fusion-fb05-dual-evolution": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 449.95,
-   "market": 449.95,
-   "mean3": 473.08,
+   "headline": 453.59,
+   "market": 453.59,
+   "mean3": 492.97,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-09-30",
+     "price": 492.31,
+     "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-27",
+     "price": 492.31,
+     "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-09-25",
      "price": 494.29,
-     "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-21",
-     "price": 475.0,
-     "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-20",
-     "price": 449.95,
      "title": "Dual Evolution Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -197,11 +197,17 @@
   "eb-02": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 794.8,
-   "market": 794.8,
-   "mean3": 796.62,
+   "headline": 791.21,
+   "market": 791.21,
+   "mean3": 786.62,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-01",
+     "price": 770.0,
+     "title": "Extra Booster: Anime 25th Collection Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-25",
      "price": 779.99,
@@ -211,12 +217,6 @@
     {
      "date": "2026-09-16",
      "price": 809.88,
-     "title": "Extra Booster: Anime 25th Collection Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-15",
-     "price": 799.98,
      "title": "Extra Booster: Anime 25th Collection Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -239,26 +239,26 @@
   "eb-03": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 325.0,
-   "market": 325.0,
-   "mean3": 324.82,
+   "headline": 323.74,
+   "market": 323.74,
+   "mean3": 323.31,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 324.49,
+     "date": "2026-10-03",
+     "price": 320.0,
      "title": "Extra Booster: One Piece Heroines Edition Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-26",
-     "price": 325.46,
+     "date": "2026-10-02",
+     "price": 324.97,
      "title": "Extra Booster: One Piece Heroines Edition Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-21",
-     "price": 324.5,
+     "date": "2026-10-01",
+     "price": 324.97,
      "title": "Extra Booster: One Piece Heroines Edition Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -271,26 +271,26 @@
   "etb-30th-celebration": {
    "basis": "mean3",
    "bucket": "lots",
-   "headline": 165.0,
-   "market": 166.32,
-   "mean3": 166.32,
-   "salesAvailable": 23,
+   "headline": 159.24,
+   "market": 161.33,
+   "mean3": 161.33,
+   "salesAvailable": 25,
    "samples": [
+    {
+     "date": "2026-10-04",
+     "price": 159.0,
+     "title": "30th Celebration Elite Trainer Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-29",
+     "price": 165.0,
+     "title": "30th Celebration Elite Trainer Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-28",
      "price": 160.0,
-     "title": "30th Celebration Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-27",
-     "price": 170.97,
-     "title": "30th Celebration Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-26",
-     "price": 168.0,
      "title": "30th Celebration Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -303,26 +303,26 @@
   "lorcana-archazias-island": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 125.69,
-   "market": 125.69,
-   "mean3": 134.4,
+   "headline": 138.05,
+   "market": 138.05,
+   "mean3": 150.66,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 125.96,
+     "date": "2026-10-02",
+     "price": 149.99,
      "title": "Disney Lorcana: Archazia's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-26",
-     "price": 125.96,
+     "date": "2026-10-01",
+     "price": 135.0,
      "title": "Disney Lorcana: Archazia's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
-     "price": 151.28,
+     "date": "2026-09-29",
+     "price": 166.98,
      "title": "Disney Lorcana: Archazia's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -335,26 +335,26 @@
   "lorcana-attack-of-vine": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 205.0,
-   "market": 205.0,
-   "mean3": 195.21,
-   "salesAvailable": 15,
+   "headline": 200.0,
+   "market": 200.0,
+   "mean3": 195.29,
+   "salesAvailable": 17,
    "samples": [
+    {
+     "date": "2026-10-01",
+     "price": 188.0,
+     "title": "Disney Lorcana: Attack of the Vine! Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-30",
+     "price": 198.97,
+     "title": "Disney Lorcana: Attack of the Vine! Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-25",
      "price": 198.89,
-     "title": "Disney Lorcana: Attack of the Vine! Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-20",
-     "price": 198.45,
-     "title": "Disney Lorcana: Attack of the Vine! Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-15",
-     "price": 188.29,
      "title": "Disney Lorcana: Attack of the Vine! Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -367,26 +367,26 @@
   "lorcana-azurite-sea": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 118.48,
-   "market": 118.48,
-   "mean3": 118.47,
-   "salesAvailable": 7,
+   "headline": 119.95,
+   "market": 119.95,
+   "mean3": 119.45,
+   "salesAvailable": 9,
    "samples": [
+    {
+     "date": "2026-09-29",
+     "price": 119.94,
+     "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-27",
+     "price": 119.95,
+     "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-24",
      "price": 118.46,
-     "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-23",
-     "price": 118.46,
-     "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-19",
-     "price": 118.49,
      "title": "Disney Lorcana: Azurite Sea Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -399,27 +399,27 @@
   "lorcana-fabled": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 807.44,
-   "market": 807.44,
-   "mean3": 806.31,
+   "headline": 810.56,
+   "market": 810.56,
+   "mean3": 827.66,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-20",
-     "price": 809.0,
-     "title": "*SEALED* Fabled Booster Box (Plastic Cover Included) Unopened English [TCGPlayer]",
+     "date": "2026-10-03",
+     "price": 815.0,
+     "title": "Disney Lorcana Fabled Booster Box Int. English with minor crease Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-18",
-     "price": 824.94,
+     "date": "2026-09-29",
+     "price": 820.0,
      "title": "Disney Lorcana: Fabled Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-14",
-     "price": 785.0,
-     "title": "Fabled Booster Box with various corner or box dents Unopened English [TCGPlayer]",
+     "date": "2026-09-29",
+     "price": 847.98,
+     "title": "Disney Lorcana: Fabled Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
    ],
@@ -431,27 +431,27 @@
   "lorcana-first-chapter": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 484.09,
-   "market": 484.09,
-   "mean3": 483.33,
+   "headline": 500.0,
+   "market": 500.0,
+   "mean3": 460.33,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 450.0,
-     "title": "24x Loose Pack Bundle , All From Starter Decks Unopened English [TCGPlayer]",
+     "date": "2026-10-03",
+     "price": 430.99,
+     "title": "Disney Lorcana: The First Chapter Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-26",
+     "date": "2026-10-02",
      "price": 499.99,
      "title": "Disney Lorcana: The First Chapter Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
-     "price": 500.0,
-     "title": "Disney Lorcana: The First Chapter Booster Box Unopened English [TCGPlayer]",
+     "date": "2026-09-27",
+     "price": 450.0,
+     "title": "24x Loose Pack Bundle , All From Starter Decks Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
    ],
@@ -463,25 +463,25 @@
   "lorcana-floodborn": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 171.74,
-   "market": 171.74,
-   "mean3": 171.08,
+   "headline": 164.9,
+   "market": 164.9,
+   "mean3": 163.5,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-23",
-     "price": 169.74,
+     "date": "2026-10-02",
+     "price": 147.0,
      "title": "Disney Lorcana: Rise of the Floodborn Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-19",
+     "date": "2026-10-01",
      "price": 171.75,
      "title": "Disney Lorcana: Rise of the Floodborn Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-18",
+     "date": "2026-09-30",
      "price": 171.75,
      "title": "Disney Lorcana: Rise of the Floodborn Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
@@ -495,26 +495,26 @@
   "lorcana-into-inklands": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 127.44,
-   "market": 127.44,
-   "mean3": 129.94,
+   "headline": 121.76,
+   "market": 121.76,
+   "mean3": 117.0,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-24",
-     "price": 128.9,
+     "date": "2026-10-04",
+     "price": 104.0,
      "title": "Disney Lorcana: Into the Inklands Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-23",
-     "price": 128.93,
+     "date": "2026-10-03",
+     "price": 126.99,
      "title": "Disney Lorcana: Into the Inklands Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-22",
-     "price": 131.99,
+     "date": "2026-09-28",
+     "price": 120.0,
      "title": "Disney Lorcana: Into the Inklands Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -527,26 +527,26 @@
   "lorcana-reign-of-jafar": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 164.13,
-   "market": 164.13,
-   "mean3": 153.95,
+   "headline": 152.0,
+   "market": 152.0,
+   "mean3": 150.66,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-26",
-     "price": 155.93,
+     "date": "2026-10-01",
+     "price": 157.99,
      "title": "Disney Lorcana: Reign of Jafar Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-24",
-     "price": 155.93,
+     "date": "2026-09-30",
+     "price": 145.0,
      "title": "Disney Lorcana: Reign of Jafar Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-23",
-     "price": 149.99,
+     "date": "2026-09-29",
+     "price": 148.99,
      "title": "Disney Lorcana: Reign of Jafar Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -559,26 +559,26 @@
   "lorcana-shimmering-skies": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 142.32,
-   "market": 142.32,
-   "mean3": 146.55,
-   "salesAvailable": 27,
+   "headline": 138.53,
+   "market": 138.53,
+   "mean3": 134.67,
+   "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-24",
+     "date": "2026-09-30",
+     "price": 126.0,
+     "title": "Disney Lorcana: Shimmering Skies Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-28",
+     "price": 130.0,
+     "title": "Disney Lorcana: Shimmering Skies Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-27",
      "price": 148.0,
-     "title": "Disney Lorcana: Shimmering Skies Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-23",
-     "price": 152.69,
-     "title": "Disney Lorcana: Shimmering Skies Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-22",
-     "price": 138.97,
      "title": "Disney Lorcana: Shimmering Skies Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -591,26 +591,26 @@
   "lorcana-ursulas-return": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 134.92,
-   "market": 134.92,
-   "mean3": 119.95,
-   "salesAvailable": 18,
+   "headline": 125.5,
+   "market": 125.5,
+   "mean3": 116.63,
+   "salesAvailable": 22,
    "samples": [
     {
-     "date": "2026-09-26",
+     "date": "2026-10-01",
      "price": 119.95,
      "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
+     "date": "2026-09-30",
      "price": 119.95,
      "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-24",
-     "price": 119.96,
+     "date": "2026-09-29",
+     "price": 110.0,
      "title": "Disney Lorcana: Ursula's Return Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -623,26 +623,26 @@
   "lorcana-whispers-well": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 225.92,
-   "market": 225.92,
-   "mean3": 237.5,
+   "headline": 233.26,
+   "market": 233.26,
+   "mean3": 246.65,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-26",
-     "price": 255.0,
+     "date": "2026-10-02",
+     "price": 249.99,
      "title": "Disney Lorcana: Whispers in the Well Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
-     "price": 255.0,
+     "date": "2026-10-01",
+     "price": 244.98,
      "title": "Disney Lorcana: Whispers in the Well Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-18",
-     "price": 202.49,
+     "date": "2026-09-30",
+     "price": 244.98,
      "title": "Disney Lorcana: Whispers in the Well Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -655,11 +655,17 @@
   "lorcana-wilds-unknown": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 236.29,
-   "market": 236.29,
-   "mean3": 239.52,
+   "headline": 237.72,
+   "market": 237.72,
+   "mean3": 237.85,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-09-27",
+     "price": 235.0,
+     "title": "Disney Lorcana: Wilds Unknown Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-24",
      "price": 236.77,
@@ -669,12 +675,6 @@
     {
      "date": "2026-09-23",
      "price": 241.78,
-     "title": "Disney Lorcana: Wilds Unknown Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-22",
-     "price": 240.0,
      "title": "Disney Lorcana: Wilds Unknown Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -687,26 +687,26 @@
   "lorcana-winterspell": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 249.06,
-   "market": 249.06,
-   "mean3": 254.89,
+   "headline": 255.41,
+   "market": 255.41,
+   "mean3": 268.56,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-23",
-     "price": 273.94,
+     "date": "2026-10-04",
+     "price": 268.48,
      "title": "Disney Lorcana: Winterspell Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-22",
-     "price": 273.98,
+     "date": "2026-10-02",
+     "price": 268.48,
      "title": "Disney Lorcana: Winterspell Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-21",
-     "price": 216.76,
+     "date": "2026-10-01",
+     "price": 268.73,
      "title": "Disney Lorcana: Winterspell Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -719,8 +719,8 @@
   "mtg-brothers-war-collector": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 646.09,
-   "market": 646.09,
+   "headline": 668.88,
+   "market": 668.88,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/magic-brother%27s-war/collector-booster-box",
@@ -729,33 +729,32 @@
   "mtg-commander-masters-collector": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 550.0,
-   "market": 550.0,
-   "mean3": 550.0,
+   "headline": 563.98,
+   "market": 563.98,
+   "mean3": 582.62,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-23",
-     "price": 550.0,
+     "date": "2026-09-30",
+     "price": 599.99,
      "title": "Commander Masters - Collector Booster Box Unopened English Collector [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-22",
-     "price": 550.0,
-     "title": "Commander Masters [CMM] - Collector Booster Box, Sealed [BIN 618] Unopened English Collector [TCGPlayer]",
-     "venue": "CMM"
+     "date": "2026-09-28",
+     "price": 578.88,
+     "title": "Commander Masters - Collector Booster Box Unopened English Collector [TCGPlayer]",
+     "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-20",
-     "price": 550.0,
-     "title": "Commander Masters [CMM] - Collector Booster Box, Sealed [BIN 617] Unopened English Collector [TCGPlayer]",
-     "venue": "CMM"
+     "date": "2026-09-27",
+     "price": 569.0,
+     "title": "Commander Masters - Collector Booster Box Unopened English Collector [TCGPlayer]",
+     "venue": "TCGPlayer"
     }
    ],
    "url": "https://www.pricecharting.com/game/magic-commander-masters/booster-box-collector",
    "venues": [
-    "CMM",
     "TCGPlayer"
    ]
   },
@@ -772,26 +771,26 @@
   "mtg-final-fantasy-collector": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 1738.87,
-   "market": 1738.87,
-   "mean3": 1680.23,
+   "headline": 1716.5,
+   "market": 1716.5,
+   "mean3": 1660.32,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-10-01",
+     "price": 1662.99,
+     "title": "FINAL FANTASY - Collector Booster Display Unopened English Collector [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-30",
+     "price": 1652.0,
+     "title": "FINAL FANTASY - Collector Booster Display Unopened English Collector [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-09-27",
      "price": 1665.98,
-     "title": "FINAL FANTASY - Collector Booster Display Unopened English Collector [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-25",
-     "price": 1684.72,
-     "title": "FINAL FANTASY - Collector Booster Display Unopened English Collector [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-22",
-     "price": 1689.99,
      "title": "FINAL FANTASY - Collector Booster Display Unopened English Collector [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -804,8 +803,8 @@
   "mtg-lotr-collector": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 1919.68,
-   "market": 1919.68,
+   "headline": 1915.76,
+   "market": 1915.76,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/magic-lord-of-the-rings/collector-booster-box",
@@ -814,8 +813,8 @@
   "mtg-lotr-special-edition": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 5800.0,
-   "market": 5800.0,
+   "headline": 6247.45,
+   "market": 6247.45,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/magic-lord-of-the-rings/booster-box-collector-special-edition",
@@ -844,8 +843,8 @@
   "op-01": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 1376.0,
-   "market": 1376.0,
+   "headline": 1306.38,
+   "market": 1306.38,
    "mean3": 1319.96,
    "salesAvailable": 14,
    "samples": [
@@ -876,8 +875,8 @@
   "op-01-blue-bottom": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 4512.5,
-   "market": 4512.5,
+   "headline": 4377.48,
+   "market": 4377.48,
    "mean3": 4950.0,
    "salesAvailable": 30,
    "samples": [
@@ -908,11 +907,17 @@
   "op-02": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 506.79,
-   "market": 506.79,
-   "mean3": 483.33,
+   "headline": 493.14,
+   "market": 493.14,
+   "mean3": 480.32,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-02",
+     "price": 472.98,
+     "title": "Dented Corner - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-18",
      "price": 483.99,
@@ -922,12 +927,6 @@
     {
      "date": "2026-09-16",
      "price": 483.99,
-     "title": "Paramount War - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-12",
-     "price": 482.01,
      "title": "Paramount War - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -950,26 +949,26 @@
   "op-03": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 496.02,
-   "market": 496.02,
-   "mean3": 487.0,
+   "headline": 509.74,
+   "market": 509.74,
+   "mean3": 506.6,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-10-02",
+     "price": 509.9,
+     "title": "Pillars of Strength - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-30",
+     "price": 509.9,
+     "title": "Pillars of Strength - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-09-25",
      "price": 500.0,
-     "title": "Pillars of Strength - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-18",
-     "price": 489.0,
-     "title": "Pillars of Strength - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-13",
-     "price": 471.99,
      "title": "Pillars of Strength - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -992,11 +991,17 @@
   "op-04": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 491.2,
-   "market": 491.2,
-   "mean3": 494.93,
+   "headline": 476.87,
+   "market": 476.87,
+   "mean3": 499.88,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-02",
+     "price": 499.85,
+     "title": "Kingdoms of Intrigue - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-18",
      "price": 499.9,
@@ -1006,12 +1011,6 @@
     {
      "date": "2026-09-17",
      "price": 499.89,
-     "title": "Kingdoms of Intrigue - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-03",
-     "price": 485.0,
      "title": "Kingdoms of Intrigue - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1024,8 +1023,8 @@
   "op-04-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 116.54,
-   "market": 116.54,
+   "headline": 131.28,
+   "market": 131.28,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-kingdoms-of-intrigue/booster-box",
@@ -1034,11 +1033,17 @@
   "op-05": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 1061.0,
-   "market": 1061.0,
-   "mean3": 1033.32,
+   "headline": 948.0,
+   "market": 948.0,
+   "mean3": 1029.16,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-02",
+     "price": 1037.49,
+     "title": "Awakening of the New Era - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-22",
      "price": 1024.99,
@@ -1048,12 +1053,6 @@
     {
      "date": "2026-09-15",
      "price": 1025.0,
-     "title": "Awakening of the New Era - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-14",
-     "price": 1049.98,
      "title": "Awakening of the New Era - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1066,26 +1065,26 @@
   "op-06": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 397.31,
-   "market": 397.31,
-   "mean3": 417.33,
+   "headline": 380.0,
+   "market": 380.0,
+   "mean3": 408.92,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-10-02",
+     "price": 383.78,
+     "title": "Wings of the Captain - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-10-01",
+     "price": 424.99,
+     "title": "Wings of the Captain - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-09-23",
      "price": 417.99,
-     "title": "Wings of the Captain - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-22",
-     "price": 417.0,
-     "title": "Wings of the Captain - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-18",
-     "price": 416.99,
      "title": "Wings of the Captain - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1098,8 +1097,8 @@
   "op-06-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 211.1,
-   "market": 211.1,
+   "headline": 184.9,
+   "market": 184.9,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-wings-of-the-captain/booster-box",
@@ -1108,8 +1107,8 @@
   "op-07": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 286.12,
-   "market": 286.12,
+   "headline": 286.19,
+   "market": 286.19,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-500-years-in-the-future/booster-box",
@@ -1118,8 +1117,8 @@
   "op-07-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 90.2,
-   "market": 90.2,
+   "headline": 80.6,
+   "market": 80.6,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-500-years-in-the-future/booster-box",
@@ -1128,26 +1127,26 @@
   "op-08": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 246.71,
-   "market": 246.71,
-   "mean3": 247.16,
+   "headline": 245.06,
+   "market": 245.06,
+   "mean3": 246.65,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 249.99,
+     "date": "2026-10-02",
+     "price": 249.97,
      "title": "Two Legends - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-22",
+     "date": "2026-09-30",
      "price": 240.0,
      "title": "Two Legends - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-20",
-     "price": 251.5,
+     "date": "2026-09-29",
+     "price": 249.98,
      "title": "Two Legends - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1170,26 +1169,26 @@
   "op-09": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 628.85,
-   "market": 628.85,
-   "mean3": 624.0,
+   "headline": 628.0,
+   "market": 628.0,
+   "mean3": 640.0,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 626.0,
+     "date": "2026-10-02",
+     "price": 630.0,
      "title": "Emperors in the New World - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-26",
-     "price": 625.99,
+     "date": "2026-10-01",
+     "price": 640.0,
      "title": "Emperors in the New World - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-22",
-     "price": 620.0,
+     "date": "2026-09-30",
+     "price": 649.99,
      "title": "Emperors in the New World - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1202,11 +1201,17 @@
   "op-10": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 249.99,
-   "market": 249.99,
+   "headline": 249.75,
+   "market": 249.75,
    "mean3": 249.5,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-01",
+     "price": 249.5,
+     "title": "Royal Blood Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-25",
      "price": 249.5,
@@ -1215,12 +1220,6 @@
     },
     {
      "date": "2026-09-24",
-     "price": 249.5,
-     "title": "Royal Blood Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-23",
      "price": 249.5,
      "title": "Royal Blood Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
@@ -1234,8 +1233,8 @@
   "op-10-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 83.15,
-   "market": 83.15,
+   "headline": 76.51,
+   "market": 76.51,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-royal-blood/booster-box",
@@ -1244,8 +1243,8 @@
   "op-11": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 579.78,
-   "market": 579.78,
+   "headline": 584.99,
+   "market": 584.99,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-fist-of-divine-speed/booster-box",
@@ -1254,8 +1253,8 @@
   "op-11-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 145.88,
-   "market": 145.88,
+   "headline": 140.11,
+   "market": 140.11,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-fist-of-divine-speed/booster-box",
@@ -1296,8 +1295,8 @@
   "op-12-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 80.31,
-   "market": 80.31,
+   "headline": 80.08,
+   "market": 80.08,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-legacy-of-the-master/booster-box",
@@ -1306,11 +1305,17 @@
   "op-13": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 453.35,
-   "market": 453.35,
-   "mean3": 449.35,
+   "headline": 459.72,
+   "market": 459.72,
+   "mean3": 446.67,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-03",
+     "price": 436.95,
+     "title": "Carrying On His Will Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-27",
      "price": 449.95,
@@ -1320,12 +1325,6 @@
     {
      "date": "2026-09-22",
      "price": 453.11,
-     "title": "Carrying On His Will Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-17",
-     "price": 445.0,
      "title": "Carrying On His Will Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1338,26 +1337,26 @@
   "op-14": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 259.97,
-   "market": 259.97,
-   "mean3": 269.03,
+   "headline": 259.99,
+   "market": 259.99,
+   "mean3": 267.09,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-24",
-     "price": 273.44,
+     "date": "2026-10-04",
+     "price": 266.97,
      "title": "The Azure Sea's Seven Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-23",
-     "price": 273.67,
+     "date": "2026-10-02",
+     "price": 267.16,
      "title": "The Azure Sea's Seven Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-21",
-     "price": 259.97,
+     "date": "2026-09-29",
+     "price": 267.14,
      "title": "The Azure Sea's Seven Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1370,8 +1369,8 @@
   "op-14-jp": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 83.55,
-   "market": 83.55,
+   "headline": 87.09,
+   "market": 87.09,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/one-piece-japanese-azure-sea%27s-seven/booster-box",
@@ -1380,26 +1379,26 @@
   "op-15": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 254.56,
-   "market": 254.56,
-   "mean3": 253.73,
+   "headline": 254.97,
+   "market": 254.97,
+   "mean3": 248.32,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-25",
-     "price": 246.2,
+     "date": "2026-09-30",
+     "price": 254.97,
      "title": "Adventure on Kami's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-24",
-     "price": 244.99,
+     "date": "2026-09-29",
+     "price": 250.0,
      "title": "Adventure on Kami's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-23",
-     "price": 269.99,
+     "date": "2026-09-28",
+     "price": 239.99,
      "title": "Adventure on Kami's Island Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1412,26 +1411,26 @@
   "op-16": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 214.44,
-   "market": 214.44,
-   "mean3": 217.96,
-   "salesAvailable": 26,
+   "headline": 225.0,
+   "market": 225.0,
+   "mean3": 222.99,
+   "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-24",
-     "price": 209.99,
+     "date": "2026-10-04",
+     "price": 226.98,
      "title": "The Time of Battle Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-23",
-     "price": 218.88,
-     "title": "The Time of Battle Booster Box *Dented Corner* Unopened English [TCGPlayer]",
+     "date": "2026-10-03",
+     "price": 222.0,
+     "title": "The Time of Battle Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-19",
-     "price": 225.0,
+     "date": "2026-09-29",
+     "price": 220.0,
      "title": "The Time of Battle Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1444,11 +1443,17 @@
   "op-17": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 337.34,
-   "market": 337.34,
-   "mean3": 316.65,
-   "salesAvailable": 9,
+   "headline": 308.75,
+   "market": 308.75,
+   "mean3": 303.74,
+   "salesAvailable": 10,
    "samples": [
+    {
+     "date": "2026-10-01",
+     "price": 295.25,
+     "title": "The World's Strongest Warriors Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-26",
      "price": 295.98,
@@ -1458,12 +1463,6 @@
     {
      "date": "2026-09-21",
      "price": 319.99,
-     "title": "The World's Strongest Warriors Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-16",
-     "price": 333.99,
      "title": "The World's Strongest Warriors Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1476,26 +1475,26 @@
   "pkmn-151-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 510.19,
-   "market": 510.19,
-   "mean3": 481.29,
+   "headline": 520.67,
+   "market": 520.67,
+   "mean3": 528.63,
    "salesAvailable": 30,
    "samples": [
     {
-     "date": "2026-09-27",
-     "price": 520.0,
+     "date": "2026-10-01",
+     "price": 529.99,
      "title": "151 Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
-     "price": 466.9,
+     "date": "2026-09-30",
+     "price": 533.0,
      "title": "151 Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-21",
-     "price": 456.98,
+     "date": "2026-09-29",
+     "price": 522.89,
      "title": "151 Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1508,26 +1507,26 @@
   "pkmn-30th-pc-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 310.0,
-   "market": 310.0,
-   "mean3": 319.16,
-   "salesAvailable": 25,
+   "headline": 301.35,
+   "market": 301.35,
+   "mean3": 299.66,
+   "salesAvailable": 27,
    "samples": [
+    {
+     "date": "2026-10-05",
+     "price": 274.99,
+     "title": "30th Celebration Pokemon Center Elite Trainer Box Unopened English Pokemon Center [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-09-29",
+     "price": 318.99,
+     "title": "30th Celebration Pokemon Center Elite Trainer Box Unopened English Pokemon Center [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-28",
      "price": 305.0,
-     "title": "30th Celebration Pokemon Center Elite Trainer Box Unopened English Pokemon Center [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-27",
-     "price": 327.5,
-     "title": "30th Celebration Pokemon Center Elite Trainer Box Unopened English Pokemon Center [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-27",
-     "price": 324.99,
      "title": "30th Celebration Pokemon Center Elite Trainer Box Unopened English Pokemon Center [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1540,8 +1539,8 @@
   "pkmn-celebrations-upc": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 1126.0,
-   "market": 1126.0,
+   "headline": 1137.53,
+   "market": 1137.53,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/pokemon-celebrations/ultra-premium-collection-box",
@@ -1550,26 +1549,26 @@
   "pkmn-crown-zenith-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 308.5,
-   "market": 308.5,
-   "mean3": 302.93,
+   "headline": 319.2,
+   "market": 319.2,
+   "mean3": 308.82,
    "salesAvailable": 30,
    "samples": [
     {
+     "date": "2026-10-02",
+     "price": 300.0,
+     "title": "Crown Zenith Elite Trainer Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-10-01",
+     "price": 319.48,
+     "title": "Crown Zenith Elite Trainer Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
      "date": "2026-09-27",
      "price": 306.98,
-     "title": "Crown Zenith Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-26",
-     "price": 294.89,
-     "title": "Crown Zenith Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-22",
-     "price": 306.93,
      "title": "Crown Zenith Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1582,8 +1581,8 @@
   "pkmn-hidden-fates-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 510.0,
-   "market": 510.0,
+   "headline": 520.0,
+   "market": 520.0,
    "mean3": 309.18,
    "salesAvailable": 7,
    "samples": [
@@ -1615,8 +1614,8 @@
   "pkmn-jp-shiny-treasure-ex": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 111.06,
-   "market": 111.06,
+   "headline": 105.47,
+   "market": 105.47,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/pokemon-japanese-shiny-treasure-ex/booster-box",
@@ -1625,8 +1624,8 @@
   "pkmn-jp-vstar-universe": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 185.88,
-   "market": 185.88,
+   "headline": 166.21,
+   "market": 166.21,
    "salesAvailable": 0,
    "samples": [],
    "url": "https://www.pricecharting.com/game/pokemon-japanese-vstar-universe/booster-box",
@@ -1635,11 +1634,17 @@
   "pkmn-prismatic-evo-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 139.49,
-   "market": 139.49,
-   "mean3": 144.26,
+   "headline": 141.91,
+   "market": 141.91,
+   "mean3": 142.46,
    "salesAvailable": 32,
    "samples": [
+    {
+     "date": "2026-10-02",
+     "price": 137.99,
+     "title": "Prismatic Evolutions ETB Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-27",
      "price": 149.5,
@@ -1649,12 +1654,6 @@
     {
      "date": "2026-09-22",
      "price": 139.89,
-     "title": "Prismatic Evolutions Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-17",
-     "price": 143.39,
      "title": "Prismatic Evolutions Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1667,26 +1666,26 @@
   "pkmn-shining-fates-etb": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 138.79,
-   "market": 138.79,
-   "mean3": 136.25,
+   "headline": 136.75,
+   "market": 136.75,
+   "mean3": 140.03,
    "salesAvailable": 31,
    "samples": [
     {
-     "date": "2026-09-26",
+     "date": "2026-10-02",
+     "price": 150.32,
+     "title": "Shining Fates Elite Trainer Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
+    {
+     "date": "2026-10-01",
      "price": 134.89,
      "title": "Shining Fates Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     },
     {
-     "date": "2026-09-25",
-     "price": 135.89,
-     "title": "Shining Fates Elite Trainer Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-24",
-     "price": 137.97,
+     "date": "2026-09-30",
+     "price": 134.89,
      "title": "Shining Fates Elite Trainer Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1699,11 +1698,17 @@
   "prb-02": {
    "basis": "headline",
    "bucket": "watch",
-   "headline": 380.0,
-   "market": 380.0,
-   "mean3": 385.84,
+   "headline": 378.54,
+   "market": 378.54,
+   "mean3": 385.83,
    "salesAvailable": 30,
    "samples": [
+    {
+     "date": "2026-10-03",
+     "price": 379.96,
+     "title": "Premium Booster Vol. 2 - Booster Box Unopened English [TCGPlayer]",
+     "venue": "TCGPlayer"
+    },
     {
      "date": "2026-09-23",
      "price": 378.54,
@@ -1713,12 +1718,6 @@
     {
      "date": "2026-09-23",
      "price": 398.98,
-     "title": "Premium Booster Vol. 2 - Booster Box Unopened English [TCGPlayer]",
-     "venue": "TCGPlayer"
-    },
-    {
-     "date": "2026-09-21",
-     "price": 380.0,
      "title": "Premium Booster Vol. 2 - Booster Box Unopened English [TCGPlayer]",
      "venue": "TCGPlayer"
     }
@@ -1736,7 +1735,7 @@
   "op-18": "unreleased (releases 2026-11-20)",
   "op-19": "unreleased (releases 2027-03-05)",
   "pkmn-30th-binder": "unreleased (releases 2026-12-04)",
-  "pkmn-30th-booster-bundle": "unreleased (releases 2026-10-02)",
+  "pkmn-30th-booster-bundle": "no priceUrl recorded",
   "pkmn-delta-reign-bb": "unreleased (releases 2026-11-06)",
   "pkmn-delta-reign-etb": "unreleased (releases 2026-11-06)",
   "prb-01": "no priceUrl recorded",
