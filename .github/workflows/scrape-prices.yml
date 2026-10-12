@@ -1,20 +1,24 @@
-# Scrapes PriceCharting and commits prices.json.
+# RETIRED - this workflow no longer scrapes on a schedule.
 #
-# Why this exists: the weekly Claude routine that re-prices the ledger runs in a
-# cloud sandbox with all outbound HTTPS blocked, so it cannot reach
-# PriceCharting itself. GitHub Actions runners do have network access, and the
-# sandbox CAN reach GitHub - so the scraping happens here and the routine reads
-# the committed prices.json out of this repo.
+# PriceCharting began returning 403 Forbidden to GitHub Actions runner IPs in
+# October 2026. Every one of the 69 items failed with 403 on 2026-10-12, while
+# the identical request from a residential connection still returned 200 (even
+# with no User-Agent), so the block is on the runner's IP range rather than on
+# headers or rate. Working around that would mean evading an access control the
+# site deliberately put in place, so we did not.
 #
-# Timing: this runs at 15:00 UTC Monday, one hour before the routine's 16:00 UTC
-# Monday fire. Both crons are fixed UTC, so that ordering holds year round and
-# does not drift with daylight saving.
+# The scrape now runs on an always-on Mac on a home connection, scheduled by
+# launchd, and uploads prices.json through the GitHub Contents API. See
+# scripts/scrape_prices.py, which that job fetches from this repo so this
+# remains the single source of truth for the scraping logic.
+#
+# The schedule trigger is removed so this stops failing every Monday and mailing
+# a failure notice. Manual dispatch is kept only so the 403 can be re-tested
+# cheaply if PriceCharting's policy ever changes; expect it to fail until then.
 
 name: Scrape prices
 
 on:
-  schedule:
-    - cron: "0 15 * * 1"
   workflow_dispatch: {}
 
 permissions:
