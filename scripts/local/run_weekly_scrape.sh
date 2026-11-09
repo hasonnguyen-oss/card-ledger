@@ -16,7 +16,19 @@
 set -uo pipefail
 
 REPO="hasonnguyen-oss/card-ledger"
-HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)" || HERE=""
+
+# Run as an installed file, BASH_SOURCE gives a real directory and everything
+# lands beside the script. Run straight from a pipe - `bash <(gh api ...)` or
+# `curl ... | bash` - it instead points at /dev/fd/N or stdin, whose "directory"
+# cannot hold the work and log folders. Fall back to a fixed home directory so
+# the ad-hoc invocation works the same as the scheduled one.
+case "$HERE" in
+  "" | /dev/fd* | /proc/self/fd* | /dev)
+    HERE="$HOME/card-ledger-scraper"
+    echo "(running from a pipe; using $HERE for work and logs)"
+    ;;
+esac
 WORK="$HERE/work"
 LOG="$HERE/logs/scrape-$(date -u +%Y%m%d-%H%M%S).log"
 
