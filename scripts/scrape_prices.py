@@ -19,6 +19,12 @@ Output shape:
           "venues": ["TCGPlayer"],       # distinct venues across those samples
           "url": "https://..."
         },
+        "<id>": {                        # an item carrying blendOf instead
+          "market": 416.88,              # mean of its components' markets
+          "basis": "blend",
+          "blendOf": ["<id-a>", "<id-b>"],
+          "blendComponents": {"<id-a>": 415.0, "<id-b>": 418.75}
+        },
         "<id>": {"error": "..."}         # anything that could not be priced
       }
     }
@@ -163,14 +169,22 @@ def main():
         data = json.load(fh)
 
     today = datetime.date.today().isoformat()
-    work, skipped = [], {}
+    work, skipped, blends = [], {}, []
     for bucket in ("lots", "watch"):
         for row in data.get(bucket) or []:
             url = row.get("priceUrl")
+            blend_of = row.get("blendOf")
             if bucket == "lots" and row.get("status") == "sold":
                 skipped[row["id"]] = "sold"
             elif (row.get("releaseDate") or "") > today:
                 skipped[row["id"]] = f"unreleased (releases {row['releaseDate']})"
+            elif blend_of:
+                # Some holdings are a single lot covering more than one SKU -
+                # a case of mixed Day/Night boxes, say. There is no one product
+                # page for those, so they carry blendOf: the ids of the items
+                # whose prices average into this one. Priced after the main
+                # loop, once those components have real numbers.
+                blends.append((row["id"], list(blend_of), bucket))
             elif not url:
                 skipped[row["id"]] = "no priceUrl recorded"
             elif "/search-products" in url:
@@ -194,7 +208,33 @@ def main():
         if i < len(work):
             time.sleep(random.uniform(*DELAY))
 
-    priced = len(work) - failures
+    # Blended items average their components, so they run once those are priced.
+    for item_id, components, bucket in blends:
+        have = [items.get(c) for c in components]
+        usable = [h["market"] for h in have if h and isinstance(h.get("market"), (int, float))]
+        if len(usable) != len(components):
+            missing = [c for c, h in zip(components, have)
+                       if not (h and isinstance(h.get("market"), (int, float)))]
+            items[item_id] = {
+                "error": f"blend components not priced: {', '.join(missing)}",
+                "blendOf": components,
+            }
+            failures += 1
+            print(f"  [blend] {item_id}: ERROR missing {missing}", flush=True)
+            continue
+        items[item_id] = {
+            "bucket": bucket,
+            "market": round(sum(usable) / len(usable), 2),
+            "basis": "blend",
+            "blendOf": components,
+            "blendComponents": {c: items[c]["market"] for c in components},
+            "samples": [],
+            "venues": sorted({v for c in components for v in items[c].get("venues", [])}),
+        }
+        print(f"  [blend] {item_id}: ${items[item_id]['market']} "
+              f"(mean of {', '.join(components)})", flush=True)
+
+    priced = len(work) + len(blends) - failures
     # A total wipeout means the scraper broke or PriceCharting changed shape.
     # Better to fail loudly than to publish an empty file the routine would trust.
     if work and priced == 0:
@@ -205,7 +245,8 @@ def main():
         "source": "PriceCharting",
         "method": (
             "Mean of the 3 most recent completed ungraded sales where available, "
-            "else the headline ungraded price. Venue recorded per sample."
+            "else the headline ungraded price. Venue recorded per sample. "
+            "Items with blendOf average their named components instead."
         ),
         "priced": priced,
         "failed": failures,
